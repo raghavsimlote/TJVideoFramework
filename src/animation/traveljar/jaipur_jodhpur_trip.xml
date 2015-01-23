@@ -1,0 +1,666 @@
+<animations>
+    <!-- Jaipur Jaisalmer Jodhpur Trip -->
+    
+    <!-- Journey Introduction -->
+     <animation>
+        <name>Journey Introduction</name>
+        <element>
+            <name></name>
+            <type>image</type>
+            <description>background.jpg</description>
+            <width>480</width>
+            <height>360</height>
+            <color>white</color>                        
+            <effect></effect>            
+            <clip>false</clip>
+            <startPosition>0,0</startPosition>
+            <endPosition>0,0</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element>    
+        <element>
+            <name></name>
+            <type>text</type>
+            <description>New Year’s Bash in Royal Rajasthan</description>
+            <width></width>            
+            <height>20</height>
+            <color>black</color>  
+            <effect>middle</effect>
+            <clip>false</clip>
+            <startPosition>0.2,0.3</startPosition>
+            <endPosition>0.2,0.3</endPosition>
+            <speedX>0</speedX>            
+            <speedY>10</speedY>
+        </element>
+        <element>
+            <name></name>
+            <type>text</type>
+            <description>Zindagi na milegi dobara</description>
+            <width></width>            
+            <height>20</height>
+            <color>black</color>  
+            <effect>middle</effect>
+            <clip>false</clip>
+            <startPosition>0.25,0.4</startPosition>
+            <endPosition>0.25,0.4</endPosition>
+            <speedX>0</speedX>            
+            <speedY>10</speedY>
+        </element>
+        <element>
+            <name></name>
+            <type>text</type>
+            <description>28th Dec, 2014 - 2nd Jan 2015</description>
+            <width></width>            
+            <height>20</height>
+            <color>black</color>  
+            <effect>leftMargin</effect>
+            <clip>false</clip>
+            <startPosition>0.05,0.9</startPosition>
+            <endPosition>0.05,0.9</endPosition>
+            <speedX>0</speedX>            
+            <speedY>10</speedY>
+        </element>
+        <element>
+            <name></name>
+            <type>text</type>
+            <description>Jaipur</description>
+            <width></width>            
+            <height>20</height>
+            <color>black</color>  
+            <effect>rightMargin</effect>
+            <clip>false</clip>
+            <startPosition>0.8,0.9</startPosition>
+            <endPosition>0.8,0.9</endPosition>
+            <speedX>0</speedX>            
+            <speedY>10</speedY>
+        </element> 
+        <start>0</start>
+        <end>3000</end>
+        <background>white</background>
+    </animation>
+    
+     <animation>
+        <name>title</name>       
+        <element>
+            <name></name>
+            <type>text</type>
+            <description>Memory creators</description>
+            <width></width>            
+            <height>20</height>
+            <color>black</color>  
+            <effect>middle</effect>
+            <clip>false</clip>
+            <startPosition>0.4,-0.5</startPosition>
+            <endPosition>0.4,0.2</endPosition>
+            <speedX>0</speedX>            
+            <speedY>20</speedY>
+        </element> 
+        <start>3000</start>
+        <end>14000</end>
+        <background>white</background>
+        
+    </animation>   
+    <animation>
+        <name>People Introduction</name>   
+        <element>
+            <name></name>
+            <type>image</type>
+            <description>005.PNG</description>
+            <width>60</width>            
+            <height>60</height>
+            <color>white</color>  
+            <effect></effect>
+            <clip>true</clip>
+            <startPosition>0,0.4</startPosition>
+            <endPosition>0.1,0.4</endPosition>
+            <speedX>20</speedX>            
+            <speedY>0</speedY>
+        </element> 
+        <element>
+            <name></name>
+            <type>text</type>
+            <description>Abhinav</description>
+            <width></width>            
+            <height>10</height>
+            <color>black</color>  
+            <effect>boxMiddle</effect>
+            <clip>false</clip>
+            <startPosition>-0.1,0.6</startPosition>
+            <endPosition>0.1,0.6</endPosition>
+            <speedX>20</speedX>            
+            <speedY>0</speedY>
+        </element>
+        <start>4000</start>
+        <end>14000</end>
+        <background>white</background>
+        
+    </animation>   
+    <animation>
+        <name>Eenu photo</name>      
+        <element>
+            <name></name>
+            <type>image</type>
+            <description>006.PNG</description>
+            <width>60</width>            
+            <height>60</height>
+            <color>white</color>  
+            <effect></effect>
+            <clip>true</clip>
+            <startPosition>0,0.4</startPosition>
+            <endPosition>0.425,0.4</endPosition>
+            <speedX>25</speedX>            
+            <speedY>0</speedY>
+        </element> 
+        <element>
+            <name></name>
+            <type>text</type>
+            <description>Eenu</description>
+            <width></width>            
+            <height>10</height>
+            <color>black</color>  
+            <effect>boxMiddle</effect>
+            <clip>false</clip>
+            <startPosition>-0.425,0.6</startPosition>
+            <endPosition>0.425,0.6</endPosition>
+            <speedX>25</speedX>            
+            <speedY>0</speedY>
+        </element>
+        <start>6000</start>
+        <end>14000</end>
+        <background>white</background>
+    </animation>
+    
+    <animation>
+        <name>Buu photo</name>         
+        <element>
+            <name></name>
+            <type>image</type>
+            <description>007.PNG</description>
+            <width>60</width>            
+            <height>60</height>
+            <color>white</color>  
+            <effect></effect>
+            <clip>true</clip>
+            <startPosition>0,0.4</startPosition>
+            <endPosition>0.75,0.4</endPosition>
+            <speedX>30</speedX>            
+            <speedY>0</speedY>
+        </element> 
+        <element>
+            <name></name>
+            <type>text</type>
+            <description>Buu</description>
+            <width></width>            
+            <height>10</height>
+            <color>black</color>  
+            <effect>boxMiddle</effect>
+            <clip>false</clip>
+            <startPosition>-0.75,0.6</startPosition>
+            <endPosition>0.75,0.6</endPosition>
+            <speedX>30</speedX>            
+            <speedY>0</speedY>
+        </element> 
+        
+        <start>8000</start>
+        <end>14000</end>
+        <background>white</background>
+        
+    </animation>
+    <animation>
+        <name>slide</name>
+        <!-- move as slide -->
+        <start>13850</start>
+        <end>15000</end>
+        <background>gray</background>
+    </animation>
+    
+    <animation>
+        <name>Jaipur Jodhpur Trip Details</name>        
+        <element>
+            <name></name>
+            <type>text</type>
+            <description>Jaipur to Jodhpur Trip</description>
+            <width></width>            
+            <height>15</height>
+            <color>white</color>  
+            <effect></effect>
+            <clip>false</clip>
+            <startPosition>0.4, 0.1</startPosition>
+            <endPosition>0.4, 0.1</endPosition>
+            <speedX>0</speedX>            
+            <speedY>10</speedY>
+        </element>
+        <start>15000</start>
+        <end>35000</end>
+        <background>gray</background>
+    </animation>
+    <animation>
+        <name>home</name> 
+        <element>
+            <name>home</name>
+            <type>image</type>
+            <description>jaipur.jpg</description>
+            <width>30</width>            
+            <height>30</height>
+            <color>white</color>  
+            <effect>fade;0-0.1-0.2-0.3-0.4-0.5-0.6-0.7-0.8-0.9-1</effect>
+            <clip>false</clip>
+            <startPosition>0.1,0.4</startPosition>
+            <endPosition>0.1,0.4</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element> 
+        <element>
+            <name>home</name>
+            <type>text</type>
+            <description>Jaipur</description>
+            <width></width>            
+            <height>15</height>
+            <color>white</color>  
+            <effect>fade;0-0.1-0.2-0.3-0.4-0.5-0.6-0.7-0.8-0.9-1</effect>
+            <clip>false</clip>
+            <startPosition>0.1,0.55</startPosition>
+            <endPosition>0.1,0.55</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element>
+        <start>17000</start>
+        <end>35000</end>
+        <background>gray</background>
+    </animation>
+    <animation>
+        <name>Goa</name>   
+        <element>
+            <name>Goa</name>
+            <type>image</type>
+            <description>tea break.jpg</description>
+            <width>30</width>            
+            <height>30</height>
+            <color>white</color>  
+            <effect>resize;0.1-0.2-0.5-0.6-0.8-0.9-1-1.001-1</effect>
+            <clip>false</clip>
+            <startPosition>0.45,0.4</startPosition>
+            <endPosition>0.45,0.4</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element> 
+        <element>
+            <name>Goa</name>
+            <type>text</type>
+            <description>Tea Break</description>
+            <width></width>            
+            <height>15</height>
+            <color>white</color>  
+            <effect>resize;0.1-0.2-0.5-0.6-0.8-0.9-1-1.001-1</effect>
+            <clip>false</clip>
+            <startPosition>0.45,0.55</startPosition>
+            <endPosition>0.45,0.55</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element>
+        <start>19000</start>
+        <end>35000</end>
+        <background>gray</background>
+    </animation>
+    
+    <animation>
+        <name></name>    
+        
+        <element>
+            <name>Goa</name>
+            <type>image</type>
+            <description>car.jpg</description>
+            <width>20</width>            
+            <height>20</height>
+            <color>white</color>  
+            <effect>Lmove;0.17-0.2-0.5-0.6-0.8-0.9-1-1.001-1</effect>
+            <clip>false</clip>
+            <startPosition>0.17,0.45</startPosition>
+            <endPosition>0.405,0.45</endPosition>
+            <speedX>5</speedX>            
+            <speedY>0</speedY>
+        </element>
+  		
+  		
+  		
+  		
+  		
+        <start>23000</start>
+        <end>35000</end>
+        <background>gray</background>
+    </animation>
+    
+	<animation>
+        <name>Jaipur Tea Break Image 1</name>
+        <element>
+            <name></name>
+            <type>image</type>
+            <description>002.PNG</description>
+            <width>240</width>
+            <height>180</height>
+            <color>white</color>  
+            <effect>middle</effect>
+            <clip>false</clip>
+            <startPosition>0.2,0.3</startPosition>
+            <endPosition>0.2,0.3</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element>   
+        
+        <element>
+            <name></name>
+            <type>text</type>
+            <description>28th Dec, 2014 - 2nd Jan 2015</description>
+            <width></width>            
+            <height>20</height>
+            <color>black</color>  
+            <effect>leftMargin</effect>
+            <clip>false</clip>
+            <startPosition>0.05,0.9</startPosition>
+            <endPosition>0.05,0.9</endPosition>
+            <speedX>0</speedX>            
+            <speedY>10</speedY>
+        </element>
+        <element>
+            <name></name>
+            <type>text</type>
+            <description>Jaipur</description>
+            <width></width>            
+            <height>20</height>
+            <color>black</color>  
+            <effect>rightMargin</effect>
+            <clip>false</clip>
+            <startPosition>0.8,0.9</startPosition>
+            <endPosition>0.8,0.9</endPosition>
+            <speedX>0</speedX>            
+            <speedY>10</speedY>
+        </element>
+        
+        <start>30000</start>
+        <end>35000</end>
+       <background>gray</background>
+    </animation>
+    
+    <animation>
+         <name>Jaipur Tea Break Image 2</name>
+        <element>
+            <name></name>
+            <type>image</type>
+            <description>003.PNG</description>
+            <width>240</width>
+            <height>180</height>
+            <color>white</color>  
+            <effect>middle</effect>
+            <clip>false</clip>
+            <startPosition>0.2,0.3</startPosition>
+            <endPosition>0.2,0.3</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element>   
+        
+        <start>32000</start>
+        <end>35000</end>
+        <background>gray</background>
+    </animation>
+    
+    <animation>
+         <name>Jaipur Tea Break Image 3</name>
+        <element>
+            <name></name>
+            <type>image</type>
+            <description>004.PNG</description>
+            <width>240</width>
+            <height>180</height>
+            <color>white</color>  
+            <effect>middle</effect>
+            <clip>false</clip>
+            <startPosition>0.2,0.3</startPosition>
+            <endPosition>0.2,0.3</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element>   
+        
+        <start>34000</start>
+        <end>35000</end>
+        <background>gray</background>
+    </animation>
+    
+    
+    <animation>
+         <name>Jaipur Tea Break Image 3</name>
+         
+          <element>
+            <name>home</name>
+            <type>image</type>
+            <description>jaipur.jpg</description>
+            <width>30</width>            
+            <height>30</height>
+            <color>white</color>  
+            <effect></effect>
+            <clip>false</clip>
+            <startPosition>0.1,0.4</startPosition>
+            <endPosition>0.1,0.4</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element> 
+        <element>
+            <name>home</name>
+            <type>text</type>
+            <description>Jaipur</description>
+            <width></width>            
+            <height>15</height>
+            <color>white</color>  
+            <effect></effect>
+            <clip>false</clip>
+            <startPosition>0.1,0.55</startPosition>
+            <endPosition>0.1,0.55</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element>
+         
+         <element>
+            <name>Goa</name>
+            <type>image</type>
+            <description>tea break.jpg</description>
+            <width>30</width>            
+            <height>30</height>
+            <color>white</color>  
+            <effect></effect>
+            <clip>false</clip>
+            <startPosition>0.45,0.4</startPosition>
+            <endPosition>0.45,0.4</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element> 
+        <element>
+            <name>Goa</name>
+            <type>text</type>
+            <description>Tea Break</description>
+            <width></width>            
+            <height>15</height>
+            <color>white</color>  
+            <effect></effect>
+            <clip>false</clip>
+            <startPosition>0.45,0.55</startPosition>
+            <endPosition>0.45,0.55</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element>
+         
+         <element>
+            <name>Goa</name>
+            <type>image</type>
+            <description>jaisalmer.jpg</description>
+            <width>30</width>            
+            <height>30</height>
+            <color>white</color>  
+            <effect></effect>
+            <clip>false</clip>
+            <startPosition>0.8,0.4</startPosition>
+            <endPosition>0.8,0.4</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element> 
+        
+         <element>
+            <name>Goa</name>
+            <type>text</type>
+            <description>Jaisalmer</description>
+           <width></width>            
+            <height>15</height>
+            <color>white</color>  
+            <effect>resize;0.1-0.2-0.5-0.6-0.8-0.9-1-1.001-1</effect>
+            <clip>false</clip>
+            <startPosition>0.8,0.55</startPosition>
+            <endPosition>0.8,0.55</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element>
+         
+        <start>35000</start>
+        <end>120000</end>
+        <background>gray</background>
+    </animation>
+    
+    <animation>
+         <name>Jaipur to Jaisalmer Trip</name>
+         
+         <element>
+            <name>Goa</name>
+            <type>image</type>
+            <description>car.jpg</description>
+            <width>20</width>            
+            <height>20</height>
+            <color>white</color>  
+            <effect>feet;0</effect>
+            <clip>false</clip>
+            <startPosition>0.5,0.45</startPosition>
+            <endPosition>0.76,0.45</endPosition>
+            <speedX>5</speedX>            
+            <speedY>0</speedY>
+        </element>
+         
+        <start>35000</start>
+        <end>38000</end>
+        <background>gray</background>
+    </animation>
+    
+    <animation>
+        <name>Jaipur Tea Break Image 1</name>
+        <element>
+            <name></name>
+            <type>image</type>
+            <description>005.PNG</description>
+            <width>240</width>
+            <height>180</height>
+            <color>white</color>  
+            <effect>middle</effect>
+            <clip>false</clip>
+            <startPosition>0.2,0.3</startPosition>
+            <endPosition>0.2,0.3</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element>   
+        
+         <element>
+            <name></name>
+            <type>text</type>
+            <description>28th Dec, 2014 - 2nd Jan 2015</description>
+            <width></width>            
+            <height>20</height>
+            <color>black</color>  
+            <effect>leftMargin</effect>
+            <clip>false</clip>
+            <startPosition>0.05,0.9</startPosition>
+            <endPosition>0.05,0.9</endPosition>
+            <speedX>0</speedX>            
+            <speedY>10</speedY>
+        </element>
+        <element>
+            <name></name>
+            <type>text</type>
+            <description>Jaipur</description>
+            <width></width>            
+            <height>20</height>
+            <color>black</color>  
+            <effect>rightMargin</effect>
+            <clip>false</clip>
+            <startPosition>0.8,0.9</startPosition>
+            <endPosition>0.8,0.9</endPosition>
+            <speedX>0</speedX>            
+            <speedY>10</speedY>
+        </element>
+        
+        <start>38000</start>
+        <end>150000</end>
+       <background>gray</background>
+    </animation>
+    
+    <animation>
+         <name>Jaipur Tea Break Image 2</name>
+        <element>
+            <name></name>
+            <type>image</type>
+            <description>006.PNG</description>
+            <width>240</width>
+            <height>180</height>
+            <color>white</color>  
+            <effect>middle</effect>
+            <clip>false</clip>
+            <startPosition>0.2,0.3</startPosition>
+            <endPosition>0.2,0.3</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element>   
+        
+        <start>40000</start>
+        <end>150000</end>
+        <background>gray</background>
+    </animation>
+    
+    <animation>
+         <name>Jaipur Tea Break Image 3</name>
+        <element>
+            <name></name>
+            <type>image</type>
+            <description>007.PNG</description>
+            <width>240</width>
+            <height>180</height>
+            <color>white</color>  
+            <effect>middle</effect>
+            <clip>false</clip>
+            <startPosition>0.2,0.3</startPosition>
+            <endPosition>0.2,0.3</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element>   
+        
+        <start>42000</start>
+        <end>42000</end>
+        <background>gray</background>
+    </animation>
+    
+     <animation>
+         <name>Video</name>
+        <element>
+            <name></name>
+            <type>video</type>
+            <description>sample-flv-video.flv</description>
+            <width></width>
+            <height></height>
+            <color></color>  
+            <effect></effect>
+            <clip>false</clip>
+            <startPosition>0.2,0.3</startPosition>
+            <endPosition>0.2,0.3</endPosition>
+            <speedX>0</speedX>            
+            <speedY>0</speedY>
+        </element>   
+        
+        <start>42000</start>
+        <end>420000</end>
+        <background>gray</background>
+    </animation>
+    
+    
+</animations>
