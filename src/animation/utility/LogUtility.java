@@ -26,4 +26,9 @@ public class LogUtility {
 		}
 		
 	}
+	
+	public static void printConsole(String consoleString) {
+		System.out.println(consoleString);
+	}
+	
 }

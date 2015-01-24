@@ -47,4 +47,26 @@ public class Animation {
         return elements;
     }
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setElements(List<Element> elements) {
+		this.elements = elements;
+	}
+
+	public void setStart(double start) {
+		this.start = start;
+	}
+
+	public void setEnd(double end) {
+		this.end = end;
+	}
+
+	public void setBackground(String background) {
+		this.background = background;
+	}
+    
+    
+
 }

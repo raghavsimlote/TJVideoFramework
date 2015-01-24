@@ -1,0 +1,74 @@
+{
+  "journey": {
+    "name": "New Year’s Bash in Royal Rajasthan",
+    "tag_line": "zindagi na milegi dobara",
+    "start_date": "28th Dec, 2014",
+    "end_date": "2nd Jan, 2015",
+    "place": {
+      "place_item": [
+        "jaipur",
+        "jaisalmer",
+        "jodhpur"
+      ]
+    },
+    "bg_image": "path_XYZ"
+  },
+  "friends": {
+      "friend_item": [
+		{
+			"name": "Abhinav",
+			"profile_img": "path_XYZ"
+		}
+      ]
+    },
+	"milestone": {
+      "stone": [
+		{
+			"name": "jaipur",
+			"type": "“city",
+			"pictures": {
+				"picture": [
+					{
+						"path": "Abhinav",
+						"caption": "path_XYZ",
+						"description": "Abhinav",
+						"place": "Abhinav",
+						"date": "Abhinav"
+					}
+				]
+			},
+			"videos": {
+				"video": [
+					{
+						"path": "Abhinav",
+						"caption": "path_XYZ",
+						"description": "Abhinav",
+						"place": "Abhinav",
+						"date": "Abhinav"
+					}
+				]
+			},
+			"notes": {
+				"note": [
+					{
+						"path": "Abhinav",
+						"caption": "path_XYZ",
+						"description": "Abhinav",
+						"place": "Abhinav",
+						"date": "Abhinav"
+					}
+				]
+			},
+			"moods": {
+				"mood": [
+					{
+						"person": "Abhinav",
+						"mood": "path_XYZ",
+						"reason": "Abhinav"
+					}
+				]
+			}
+		}
+      ]
+    }
+}

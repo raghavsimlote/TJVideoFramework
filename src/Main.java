@@ -6,6 +6,8 @@ import jade.wrapper.StaleProxyException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.traveljar.vo.TravelJarVO;
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -19,7 +21,7 @@ import javafx.stage.Stage;
 import animation.agent.SceneAgent;
 import animation.model.Animation;
 import animation.model.Data;
-import animation.xml.ReadXML;
+import animation.model.VideoModel;
 
 /**
  *
@@ -41,9 +43,13 @@ public class Main extends Application {
         try {
            // rma = agentContainer.createNewAgent("rma", jade.tools.rma.rma.class.getName(), new Object[0]);
            // rma.start();
-
-            ReadXML readXML = new ReadXML();
-            Data.animations = readXML.getAnimations();
+        	
+        	VideoModel model = new VideoModel();
+        	TravelJarVO travelJar = model.createVideo();
+        	model.createAnimations(travelJar);
+        	
+//            ReadXML readXML = new ReadXML();
+//            Data.animations = readXML.getAnimations();
             System.out.println("Data.animations " + Data.animations.size());
             Object[] obj = new Object[2];
             obj[1] = root;

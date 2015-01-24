@@ -1,7 +1,9 @@
 package com.traveljar.vo;
 
-import java.util.List;
+import java.util.Vector;
 
+import org.json.me.JSONArray;
+import org.json.me.JSONException;
 import org.json.me.JSONObject;
 
 public class JourneyVO {
@@ -13,7 +15,26 @@ public class JourneyVO {
 			this.setStartDate(journeyJson.optString("start_date"));
 			this.setEndDate(journeyJson.optString("end_date"));
 			this.setBrImagePath(journeyJson.optString("bg_image"));
+			JSONObject placeJson = journeyJson.optJSONObject("place");
+			if ( placeJson != null ) {
+				try {
+					JSONArray placesArray = placeJson.getJSONArray("place_item");
+					if ( placesArray != null && placesArray.length()>0 ) {
+						Vector<String> placesVector = new Vector<String>();
+						for (int i=0; i<placesArray.length(); i++) {
+							String placeName = (String) placesArray.get(i);
+							System.out.println("Place Name: " + placeName);
+							placesVector.add(placeName);
+						}
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
 		}
+		
 	}
 	
 	private String name;
@@ -21,7 +42,7 @@ public class JourneyVO {
 	private String startDate;
 	private String endDate;
 	private String brImagePath;
-	private List <String> placesList;
+	private Vector<String> placesList;
 	
 	public String getName() {
 		return name;
@@ -53,10 +74,10 @@ public class JourneyVO {
 	public void setBrImagePath(String brImagePath) {
 		this.brImagePath = brImagePath;
 	}
-	public List<String> getPlacesList() {
+	public Vector<String> getPlacesList() {
 		return placesList;
 	}
-	public void setPlacesList(List<String> placesList) {
+	public void setPlacesList(Vector<String> placesList) {
 		this.placesList = placesList;
 	}
 	

@@ -1,14 +1,20 @@
 package com.traveljar.vo;
 
-import java.util.List;
+import java.util.Vector;
+
+import org.json.me.JSONObject;
 
 public class StoneVO {
 	
+	public StoneVO(JSONObject stonesJson) {
+		
+	}
+	
 	private String name;
 	private String type;
-	private List <PictureVO> pictures;
-	private List <VideoVO> videos;
-	private List <MoodVO> moods;
+	private Vector <PictureVO> pictures;
+	private Vector <VideoVO> videos;
+	private Vector <MoodVO> moods;
 	
 	public String getName() {
 		return name;
@@ -22,22 +28,22 @@ public class StoneVO {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public List<PictureVO> getPictures() {
+	public Vector<PictureVO> getPictures() {
 		return pictures;
 	}
-	public void setPictures(List<PictureVO> pictures) {
+	public void setPictures(Vector<PictureVO> pictures) {
 		this.pictures = pictures;
 	}
-	public List<VideoVO> getVideos() {
+	public Vector<VideoVO> getVideos() {
 		return videos;
 	}
-	public void setVideos(List<VideoVO> videos) {
+	public void setVideos(Vector<VideoVO> videos) {
 		this.videos = videos;
 	}
-	public List<MoodVO> getMoods() {
+	public Vector<MoodVO> getMoods() {
 		return moods;
 	}
-	public void setMoods(List<MoodVO> moods) {
+	public void setMoods(Vector<MoodVO> moods) {
 		this.moods = moods;
 	}
 	

@@ -130,4 +130,22 @@ public class Element {
         return speedY;
     }
 
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+    
+    
+
 }
