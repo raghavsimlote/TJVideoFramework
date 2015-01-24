@@ -30,7 +30,6 @@ public class Main extends Application {
     static Scene scene;
     static Group root = new Group();
 
-    ;
 
     public static void main(String[] args) {
         jade.core.Runtime rt = jade.core.Runtime.instance();
