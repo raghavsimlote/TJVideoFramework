@@ -6,8 +6,6 @@ import jade.wrapper.StaleProxyException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.traveljar.vo.TravelJarVO;
-
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -22,6 +20,8 @@ import animation.agent.SceneAgent;
 import animation.model.Animation;
 import animation.model.Data;
 import animation.model.VideoModel;
+
+import com.traveljar.vo.TravelJarVO;
 
 /**
  *

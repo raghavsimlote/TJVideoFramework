@@ -82,6 +82,7 @@ public class VideoModel {
 			
 			List <Animation> animations =  new ArrayList<Animation>();
 			
+//			journey intro starts here, may be we should think of applying css
 			JourneyVO journey = travelJar.getJourney();
 			if ( journey != null ) {
 				
@@ -104,15 +105,34 @@ public class VideoModel {
 				
 				animation = new Animation();
 				animation.setStart(0);
-				animation.setEnd(2000);
+				animation.setEnd(5000);
 				elementsList = new ArrayList<Element>();
 				element = new Element();
 				element.setType("text");
 				element.setDescription(journey.getName());
 				element.setHeight(20);
 				element.setEffect("middle");
-				element.setStartPosition("0.2,0.3");
+				element.setStartPosition("-0.2,0.3");
 				element.setEndPosition("0.2,0.3");
+				element.setColor("black");
+				element.setSpeedX(20);
+			
+				elementsList.add(element);
+				animation.setElements(elementsList);
+				animations.add(animation);
+				
+				animation = new Animation();
+				animation.setStart(1000);
+				animation.setEnd(5000);
+				elementsList = new ArrayList<Element>();
+				element = new Element();
+				element.setType("text");
+				element.setDescription(journey.getTagLine());
+				element.setHeight(20);
+				element.setEffect("middle");
+				element.setStartPosition("-0.2,0.4");
+				element.setEndPosition("0.2,0.4");
+				element.setSpeedX(20);
 				element.setColor("black");
 				elementsList.add(element);
 				animation.setElements(elementsList);
@@ -120,22 +140,6 @@ public class VideoModel {
 				
 				animation = new Animation();
 				animation.setStart(2000);
-				animation.setEnd(4000);
-				elementsList = new ArrayList<Element>();
-				element = new Element();
-				element.setType("text");
-				element.setDescription(journey.getTagLine());
-				element.setHeight(20);
-				element.setEffect("middle");
-				element.setStartPosition("0.2,0.3");
-				element.setEndPosition("0.2,0.3");
-				element.setColor("black");
-				elementsList.add(element);
-				animation.setElements(elementsList);
-				animations.add(animation);
-				
-				animation = new Animation();
-				animation.setStart(4000);
 				animation.setEnd(5000);
 				elementsList = new ArrayList<Element>();
 				element = new Element();
@@ -143,15 +147,16 @@ public class VideoModel {
 				element.setDescription( journey.getStartDate() + " - " + journey.getEndDate() );
 				element.setHeight(20);
 				element.setEffect("leftMargin");
-				element.setStartPosition("0.2,0.3");
-				element.setEndPosition("0.2,0.3");
+				element.setStartPosition("-0.2,0.9");
+				element.setEndPosition("0.2,0.9");
+				element.setSpeedX(20);
 				element.setColor("black");
 				elementsList.add(element);
 				animation.setElements(elementsList);
 				animations.add(animation);
 				
 				animation = new Animation();
-				animation.setStart(4000);
+				animation.setStart(1500);
 				animation.setEnd(5000);
 				elementsList = new ArrayList<Element>();
 				element = new Element();
@@ -159,15 +164,95 @@ public class VideoModel {
 				element.setDescription("Jaipur");
 				element.setHeight(20);
 				element.setEffect("rightMargin");
-				element.setStartPosition("0.2,0.3");
-				element.setEndPosition("0.2,0.3");
+				element.setStartPosition("-0.2,0.9");
+				element.setEndPosition("0.2,0.9");
+				element.setSpeedX(20);
 				element.setColor("black");
 				elementsList.add(element);
 				animation.setElements(elementsList);
 				animations.add(animation);
 				
 			}
+//			journey intro ends here
 			
+			
+//			people intro starts here
+			
+			Vector friendsVector = travelJar.getFriendsVector();
+			if ( friendsVector!=null && friendsVector.size()>0 ) {
+				
+				Animation animation = new Animation();
+				animation.setStart(5000);
+				animation.setEnd(13000);
+				List<Element> elementsList = new ArrayList<Element>();
+				Element element = new Element();
+				element.setType("text");
+				element.setDescription("Memory Creators");
+				element.setHeight(20);
+				element.setEffect("middle");
+				element.setStartPosition("0.4,-0.5");
+				element.setEndPosition("0.4,0.2");
+				element.setSpeedX(0);
+				element.setSpeedY(20);
+				element.setColor("black");
+				elementsList.add(element);
+				animation.setElements(elementsList);
+				animations.add(animation);
+				
+				if ( friendsVector.size() <=4 ) {
+				
+					int gapX = (int) ( ( Data.width - ( friendsVector.size()*60 ) ) / (friendsVector.size()+1) ); 
+					
+					for ( int i=0; i<friendsVector.size(); i++) {
+						
+						FriendVO friend = (FriendVO) friendsVector.get(i);
+						animation = new Animation();
+						animation.setStart(1000);
+						animation.setEnd(5000);
+						elementsList = new ArrayList<Element>();
+						element = new Element();
+						element.setType("image");
+						element.setDescription("005.PNG");
+						element.setWidth(60);
+						element.setHeight(60);
+						element.setEffect("");
+						element.setClip(true);
+						element.setStartPosition("0,0.4");
+						element.setEndPosition("0.1,0.4");
+						element.setSpeedX(20);
+						element.setSpeedY(0);
+						element.setColor("black");
+						elementsList.add(element);
+						animation.setElements(elementsList);
+						animations.add(animation);
+						
+						element = new Element();
+						element.setType("text");
+						element.setDescription(journey.getTagLine());
+						element.setHeight(20);
+						element.setEffect("middle");
+						element.setStartPosition("-0.2,0.4");
+						element.setEndPosition("0.2,0.4");
+						element.setSpeedX(20);
+						element.setColor("black");
+						elementsList.add(element);
+						animation.setElements(elementsList);
+						animations.add(animation);
+						
+						
+					}
+					
+				}
+				
+				
+				
+				
+			}
+			
+//			people intro ends here
+			
+			
+//			refering animations for video creation
 			Data.animations = animations;
 			
 		}

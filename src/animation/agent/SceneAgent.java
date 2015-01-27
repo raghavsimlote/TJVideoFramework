@@ -196,16 +196,20 @@ public class SceneAgent extends Agent {
                                             
                                             if (desc.getEffect().startsWith("middle")) {
                                             	 final double width = label.getLayoutBounds().getWidth();
-                                                 xStart = ( Data.width - width ) / 2;
+                                            	 if ( xStart == xEnd ) {
+                                            		 xStart = ( Data.width - width ) / 2;
+                                            	 }
+//                                                 xStart = ( Data.width - width ) / 2;
                                                  xEnd = ( Data.width - width )/2;
                                             }
-                                            else if (desc.getEffect().startsWith("leftMargin")) {
-                                            	xStart = ( 10 );
+                                            else 
+                                            	if (desc.getEffect().startsWith("leftMargin")) {
+//                                            	xStart = ( 10 );
                                             	xEnd = ( 10 );
                                             }
                                             else if (desc.getEffect().startsWith("rightMargin")) {
                                             	final double width = label.getLayoutBounds().getWidth();
-                                            	xStart = ( Data.width - width - 10 );
+//                                            	xStart = ( Data.width - width - 10 );
                                             	xEnd = ( Data.width - width - 10 );
                                             }
                                             else if (desc.getEffect().startsWith("boxMiddle")) {

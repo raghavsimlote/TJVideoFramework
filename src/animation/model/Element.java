@@ -145,6 +145,10 @@ public class Element {
 	public void setHeight(int height) {
 		this.height = height;
 	}
+
+	public void setClip(boolean clip) {
+		this.clip = clip;
+	}
     
     
 
