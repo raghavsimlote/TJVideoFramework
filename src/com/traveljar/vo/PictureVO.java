@@ -1,6 +1,18 @@
 package com.traveljar.vo;
 
+import org.json.me.JSONObject;
+
 public class PictureVO {
+	
+	public PictureVO(JSONObject pictureJson) {
+		if ( pictureJson != null ) {
+			this.setPath(pictureJson.optString("path"));
+			this.setCaption(pictureJson.optString("caption"));
+			this.setDescription(pictureJson.optString("description"));
+			this.setPlace(pictureJson.optString("place"));
+			this.setDate(pictureJson.optString("date"));
+		}
+	}
 	
 	private String path;
 	private String caption;

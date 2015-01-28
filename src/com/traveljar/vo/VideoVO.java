@@ -1,6 +1,18 @@
 package com.traveljar.vo;
 
+import org.json.me.JSONObject;
+
 public class VideoVO {
+	
+	public VideoVO(JSONObject videoJson) {
+		if ( videoJson != null ) {
+			this.setPath(videoJson.optString("path"));
+			this.setCaption(videoJson.optString("caption"));
+			this.setDescription(videoJson.optString("description"));
+			this.setPlace(videoJson.optString("place"));
+			this.setDate(videoJson.optString("date"));
+		}
+	}
 	
 	private String path;
 	private String caption;

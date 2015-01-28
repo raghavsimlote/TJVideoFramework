@@ -23,7 +23,6 @@ public class JourneyVO {
 						Vector<String> placesVector = new Vector<String>();
 						for (int i=0; i<placesArray.length(); i++) {
 							String placeName = (String) placesArray.get(i);
-							System.out.println("Place Name: " + placeName);
 							placesVector.add(placeName);
 						}
 					}

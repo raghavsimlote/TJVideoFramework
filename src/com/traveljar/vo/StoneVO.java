@@ -2,12 +2,72 @@ package com.traveljar.vo;
 
 import java.util.Vector;
 
+import org.json.me.JSONArray;
+import org.json.me.JSONException;
 import org.json.me.JSONObject;
 
 public class StoneVO {
 	
 	public StoneVO(JSONObject stonesJson) {
-		
+		if ( stonesJson != null ) {
+			this.setName(stonesJson.optString("name"));
+			this.setType(stonesJson.optString("type"));
+			try {
+				JSONObject picturesJson =  stonesJson.getJSONObject("pictures");
+				if ( picturesJson != null ) {
+					JSONArray picturesArray = picturesJson.getJSONArray("picture");
+					if ( picturesArray!=null && picturesArray.length()>0 ) {
+						Vector<PictureVO> picturesVector = new Vector<PictureVO>();
+						for (int i=0; i<picturesArray.length(); i++) {
+							JSONObject pictureObject = (JSONObject) picturesArray.getJSONObject(i);
+							PictureVO picture = new PictureVO(pictureObject);
+							picturesVector.add(picture);
+						}
+						this.setPictures(picturesVector);
+					}
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				JSONObject videosJson =  stonesJson.getJSONObject("videos");
+				if ( videosJson != null ) {
+					JSONArray videosArray = videosJson.getJSONArray("video");
+					if ( videosArray!=null && videosArray.length()>0 ) {
+						Vector<VideoVO> videosVector = new Vector<VideoVO>();
+						for (int i=0; i<videosArray.length(); i++) {
+							JSONObject videoObject = (JSONObject) videosArray.getJSONObject(i);
+							VideoVO video = new VideoVO(videoObject);
+							videosVector.add(video);
+						}
+						this.setVideos(videosVector);
+					}
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				JSONObject moodsJson =  stonesJson.getJSONObject("moods");
+				if ( moodsJson != null ) {
+					JSONArray moodsArray = moodsJson.getJSONArray("mood");
+					if ( moodsArray!=null && moodsArray.length()>0 ) {
+						Vector<MoodVO> moodsVector = new Vector<MoodVO>();
+						for (int i=0; i<moodsArray.length(); i++) {
+							JSONObject moodObject = (JSONObject) moodsArray.getJSONObject(i);
+							MoodVO mood = new MoodVO(moodObject);
+							moodsVector.add(mood);
+						}
+						this.setMoods(moodsVector);
+					}
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 	}
 	
 	private String name;
@@ -46,8 +106,5 @@ public class StoneVO {
 	public void setMoods(Vector<MoodVO> moods) {
 		this.moods = moods;
 	}
-	
-	
-	
 	
 }

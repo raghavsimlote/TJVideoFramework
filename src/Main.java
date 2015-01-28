@@ -46,7 +46,7 @@ public class Main extends Application {
         	
         	VideoModel model = new VideoModel();
         	TravelJarVO travelJar = model.createVideo();
-        	model.createAnimations(travelJar);
+        	Data.animations = model.createAnimations(travelJar);
         	
 //            ReadXML readXML = new ReadXML();
 //            Data.animations = readXML.getAnimations();

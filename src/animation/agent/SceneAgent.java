@@ -68,7 +68,7 @@ public class SceneAgent extends Agent {
 
             @Override
             public void action() {
-
+            	
                 Platform.runLater(() -> {
                     root.getChildren().clear();
                     for (Animation animation : Data.animations) {
@@ -112,6 +112,14 @@ public class SceneAgent extends Agent {
                                                 xEnd = ( Data.width - desc.getWidth() )/2;
                                                 yEnd = (Data.height - desc.getHeight() ) / 2;
                                            }
+                                            
+                                            if ( desc.getEffect().indexOf("boxMiddle") >= 0 ) {
+                                            	
+                                            	String xPostionString = desc.getEffect().split(";")[1];
+                                            	xEnd = Integer.parseInt(xPostionString);
+                                            	System.out
+														.println("Image End coordinates: " + xEnd);
+                                            }
                                             
                                             if (desc.getEffect().startsWith("Lmove")) {
                                                 String ratiosString = desc.getEffect().split(";")[1];
@@ -193,7 +201,18 @@ public class SceneAgent extends Agent {
                                         	
                                             label = new Text(desc.getDescription());
                                             label.setFont(Font.font(null, FontWeight.SEMI_BOLD, desc.getHeight()));
-                                            
+                                            if ( desc.getEffect().indexOf("boxMiddle") >= 0 ) {
+                                            	
+                                            	String xPostionString = desc.getEffect().split(";")[1];
+                                            	
+                                            	final double width = label.getLayoutBounds().getWidth();
+//                                            	LogUtility.printLog("1. XEnd: " + xEnd + " Width: " + width);
+//                                            	xStart = xStart + ( ( 60 - width ) / 2 );
+                                            	xEnd = Integer.parseInt(xPostionString)  + ( ( 60 - width ) / 2 ) ;
+//                                            	LogUtility.printLog("2. XEnd: " + xEnd + " Width: " + width);
+                                            	System.out
+												.println("Text End coordinates: " + xEnd);
+                                            }
                                             if (desc.getEffect().startsWith("middle")) {
                                             	 final double width = label.getLayoutBounds().getWidth();
                                             	 if ( xStart == xEnd ) {
@@ -212,13 +231,7 @@ public class SceneAgent extends Agent {
 //                                            	xStart = ( Data.width - width - 10 );
                                             	xEnd = ( Data.width - width - 10 );
                                             }
-                                            else if (desc.getEffect().startsWith("boxMiddle")) {
-                                            	final double width = label.getLayoutBounds().getWidth();
-//                                            	LogUtility.printLog("1. XEnd: " + xEnd + " Width: " + width);
-//                                            	xStart = xStart + ( ( 60 - width ) / 2 );
-                                            	xEnd = xEnd  + ( ( 60 - width ) / 2 ) ;
-//                                            	LogUtility.printLog("2. XEnd: " + xEnd + " Width: " + width);
-                                            }
+                                            
                                             
                                            
                                             Reflection r = new Reflection();
@@ -386,7 +399,7 @@ public class SceneAgent extends Agent {
                     }
                 });
                 //max is 2 minutes
-                if (timer > 420000) {//ms time elapsed
+                if (timer > ( 2 * 60 * 1000 ) ) {//ms time elapsed
                     //stop and save video
                     System.out.println("Saving video...");
                     IJ.run(imp, "AVI... ", "compression=JPEG frame=10 save=[E:\\videos\\Stack.avi]");
