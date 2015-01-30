@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+
 import org.json.me.JSONArray;
 import org.json.me.JSONObject;
 
@@ -266,9 +270,13 @@ public class VideoModel {
 			
 				if ( ( milestonesVector.size()>1 ) && ( milestonesVector.size()<=4 ) ) {
 					
-					animation = new Animation();
-					animation.setStart(15000);
-					animation.setEnd(35000);
+					int pictureTimeGap = 15000;
+					Vector<Animation> stoneAnimations = new Vector<Animation>();
+					int totalWidth = 0;
+					
+					Animation milestonesAnimation = new Animation();
+					milestonesAnimation.setStart(pictureTimeGap);
+					milestonesAnimation.setEnd(35000);
 					elementsList = new ArrayList<Element>();
 					element = new Element();
 					element.setType("text");
@@ -281,25 +289,23 @@ public class VideoModel {
 					element.setEffect("middle");
 					element.setColor("Black");
 					elementsList.add(element);
-					animation.setElements(elementsList);
-					animations.add(animation);
+					milestonesAnimation.setElements(elementsList);
+					animations.add(milestonesAnimation);
 					
-					
-					int pictureTimeGap = 15000;
 					
 					for ( int i=0; i<milestonesVector.size(); i++) {
 						
 						StoneVO stone =  (StoneVO) milestonesVector.get(i);
 						
-						animation = new Animation();
-						animation.setStart(pictureTimeGap);
-						pictureTimeGap += 1000;
+						Animation stoneAnimation = new Animation();
+						pictureTimeGap += 5000;
+						stoneAnimation.setStart(pictureTimeGap);
 						System.out.println("Picture Gap Time: " + pictureTimeGap);
-						animation.setEnd(35000);
+						stoneAnimation.setEnd(35000);
 						elementsList = new ArrayList<Element>();
 						element = new Element();
 						element.setType("image");
-						element.setDescription("jaipur.jpg");
+						element.setDescription(stone.getType());
 						element.setWidth(30);
 						element.setHeight(30);
 						element.setStartPosition("0.1,0.4");
@@ -314,15 +320,27 @@ public class VideoModel {
 						element.setType("text");
 						element.setDescription(stone.getName());
 						element.setHeight(15);
-						element.setStartPosition("0.1,0.55");
+						
+//						count the total width
+						Text label = new Text(stone.getName());
+						label.setFont(Font.font(null, FontWeight.SEMI_BOLD, element.getHeight()));
+						int width  =  (int) label.getLayoutBounds().getWidth();
+						element.setWidth(width);
+						totalWidth += label.getLayoutBounds().getWidth();
+//						System.out.println("Width is " + totalWidth);
+						
+						element.setStartPosition("0.0,0.55");
 						element.setEndPosition("0.1,0.55");
-						element.setSpeedX(0);
+						element.setSpeedX(20);
 						element.setSpeedY(0);
 						element.setEffect("fade;0-0.1-0.2-0.3-0.4-0.5-0.6-0.7-0.8-0.9-1");
 						element.setColor("black");
 						elementsList.add(element);
-						animation.setElements(elementsList);
-						animations.add(animation);
+						stoneAnimation.setElements(elementsList);
+						animations.add(stoneAnimation);
+						
+//						add to the vector for future reference
+						stoneAnimations.add(stoneAnimation);
 						
 						Vector<PictureVO> picturesVector = stone.getPictures();
 						if ( picturesVector != null ) {
@@ -333,13 +351,13 @@ public class VideoModel {
 									if ( picture!= null ) {
 										
 										animation = new Animation();
-										animation.setStart(pictureTimeGap );
 										pictureTimeGap += 2000;
-										animation.setEnd(35000);
+										animation.setStart(pictureTimeGap );
+										animation.setEnd( pictureTimeGap + 2000 );
 										elementsList = new ArrayList<Element>();
 										element = new Element();
 										element.setType("image");
-										element.setDescription("002.PNG");
+										element.setDescription(picture.getPath());
 										element.setWidth(480);
 										element.setHeight(360);
 										element.setStartPosition("0.2,0.3");
@@ -353,8 +371,7 @@ public class VideoModel {
 										element = new Element();
 										element.setType("text");
 										element.setDescription(picture.getDate());
-										element.setWidth(30);
-										element.setHeight(30);
+										element.setHeight(20);
 										element.setStartPosition("0.05,0.9");
 										element.setEndPosition("0.05,0.9");
 										element.setSpeedX(0);
@@ -381,10 +398,25 @@ public class VideoModel {
 									
 								}
 							}
-							
+//							inner loop ends here
 						}
 						
 					}
+//					outer loop ends here
+					pictureTimeGap += 2000;
+					milestonesAnimation.setEnd(pictureTimeGap);
+					int xGap = (int) ( (Data.width-totalWidth) / (stoneAnimations.size()+1) );
+					int tempWidth = 0;
+					for (int i=0; i<stoneAnimations.size() ;i++) {
+						Animation stoneAnimation= (Animation) stoneAnimations.get(i);
+						elementsList = stoneAnimation.getElements();
+						element = (Element) elementsList.get(1);
+						int xPos = ((i+1)*xGap) + tempWidth ;
+						tempWidth += element.getWidth();
+						element.setEffect(element.getEffect() + ";textXPosition;" + xPos + ";");
+						stoneAnimation.setEnd(pictureTimeGap);
+					}
+//					set end time of stone animations same as milestone time
 					
 				}
 //				atleast 2 milestones are required for this and check for more than one row

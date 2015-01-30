@@ -201,9 +201,16 @@ public class SceneAgent extends Agent {
                                         	
                                             label = new Text(desc.getDescription());
                                             label.setFont(Font.font(null, FontWeight.SEMI_BOLD, desc.getHeight()));
+                                            if ( desc.getEffect().indexOf("textXPosition") >= 0 ) {
+                                            	
+                                            	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("textXPosition"), desc.getEffect().length());
+                                            	xEnd = Integer.parseInt(clipString.split(";")[1]); 
+                                            	System.out.println("Text X Position: " + xEnd);
+                                            }
                                             if ( desc.getEffect().indexOf("boxMiddle") >= 0 ) {
                                             	
-                                            	String xPostionString = desc.getEffect().split(";")[1];
+                                            	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("boxMiddle"), desc.getEffect().length());
+                                            	String xPostionString = clipString.split(";")[1];
                                             	
                                             	final double width = label.getLayoutBounds().getWidth();
 //                                            	LogUtility.printLog("1. XEnd: " + xEnd + " Width: " + width);
@@ -211,7 +218,7 @@ public class SceneAgent extends Agent {
                                             	xEnd = Integer.parseInt(xPostionString)  + ( ( 60 - width ) / 2 ) ;
 //                                            	LogUtility.printLog("2. XEnd: " + xEnd + " Width: " + width);
                                             	System.out
-												.println("Text End coordinates: " + xEnd);
+												.println("Text End for Box Middle: " + xEnd);
                                             }
                                             if (desc.getEffect().startsWith("middle")) {
                                             	 final double width = label.getLayoutBounds().getWidth();
