@@ -104,7 +104,12 @@ public class SceneAgent extends Agent {
                                             iv1.setFitHeight(desc.getHeight());
                                             iv1.setFitWidth(desc.getWidth());
                                             
-                                            
+                                            if ( desc.getEffect().indexOf("ImageXPosition") >= 0 ) {
+                                            	
+                                            	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("ImageXPosition"), desc.getEffect().length());
+                                            	xEnd = Integer.parseInt(clipString.split(";")[1]); 
+                                            	System.out.println("Text X Position: " + xEnd);
+                                            }
                                             if (desc.getEffect().startsWith("middle")) {
                                            	 
                                                 xStart = ( Data.width - desc.getWidth() ) / 2;
@@ -228,15 +233,17 @@ public class SceneAgent extends Agent {
 //                                                 xStart = ( Data.width - width ) / 2;
                                                  xEnd = ( Data.width - width )/2;
                                             }
-                                            else 
-                                            	if (desc.getEffect().startsWith("leftMargin")) {
+                                            else if (desc.getEffect().startsWith("leftMargin")) {
 //                                            	xStart = ( 10 );
                                             	xEnd = ( 10 );
                                             }
                                             else if (desc.getEffect().startsWith("rightMargin")) {
+                                            	System.out
+														.println("Right Margin");
                                             	final double width = label.getLayoutBounds().getWidth();
 //                                            	xStart = ( Data.width - width - 10 );
                                             	xEnd = ( Data.width - width - 10 );
+                                            	
                                             }
                                             
                                             

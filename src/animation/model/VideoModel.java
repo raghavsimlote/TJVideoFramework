@@ -203,7 +203,7 @@ public class VideoModel {
 						element.setEndPosition("0.4,0.2");
 						element.setSpeedX(0);
 						element.setSpeedY(20);
-						element.setEffect("");
+						element.setEffect("middle");
 						element.setColor("Black");
 						elementsList.add(element);
 						animation.setElements(elementsList);
@@ -298,7 +298,7 @@ public class VideoModel {
 						StoneVO stone =  (StoneVO) milestonesVector.get(i);
 						
 						Animation stoneAnimation = new Animation();
-						pictureTimeGap += 5000;
+//						pictureTimeGap += 5000;
 						stoneAnimation.setStart(pictureTimeGap);
 						System.out.println("Picture Gap Time: " + pictureTimeGap);
 						stoneAnimation.setEnd(35000);
@@ -308,11 +308,12 @@ public class VideoModel {
 						element.setDescription(stone.getType());
 						element.setWidth(30);
 						element.setHeight(30);
-						element.setStartPosition("0.1,0.4");
+						element.setStartPosition("0.0,0.4");
 						element.setEndPosition("0.1,0.4");
-						element.setSpeedX(0);
+						element.setSpeedX(20);
 						element.setSpeedY(0);
-						element.setEffect("fade;0-0.1-0.2-0.3-0.4-0.5-0.6-0.7-0.8-0.9-1");
+						element.setEffect("");
+//						element.setEffect("fade;0-0.1-0.2-0.3-0.4-0.5-0.6-0.7-0.8-0.9-1");
 						element.setColor("white");
 						elementsList.add(element);
 						
@@ -333,7 +334,8 @@ public class VideoModel {
 						element.setEndPosition("0.1,0.55");
 						element.setSpeedX(20);
 						element.setSpeedY(0);
-						element.setEffect("fade;0-0.1-0.2-0.3-0.4-0.5-0.6-0.7-0.8-0.9-1");
+						element.setEffect("");
+//						element.setEffect("fade;0-0.1-0.2-0.3-0.4-0.5-0.6-0.7-0.8-0.9-1");
 						element.setColor("black");
 						elementsList.add(element);
 						stoneAnimation.setElements(elementsList);
@@ -358,8 +360,8 @@ public class VideoModel {
 										element = new Element();
 										element.setType("image");
 										element.setDescription(picture.getPath());
-										element.setWidth(480);
-										element.setHeight(360);
+										element.setWidth(240);
+										element.setHeight(180);
 										element.setStartPosition("0.2,0.3");
 										element.setEndPosition("0.2,0.3");
 										element.setSpeedX(0);
@@ -399,7 +401,33 @@ public class VideoModel {
 								}
 							}
 //							inner loop ends here
+							pictureTimeGap += 2000;
 						}
+						
+						if ( ( (i+1)<milestonesVector.size() ) ) {
+							
+							animation = new Animation();
+							animation.setStart(pictureTimeGap);
+							pictureTimeGap += 2000;
+							animation.setEnd(pictureTimeGap);
+							elementsList = new ArrayList<Element>();
+							element = new Element();
+							element.setType("image");
+							element.setDescription( "car.jpg" );
+							element.setWidth(20);
+							element.setHeight(20);
+							element.setEffect("Lmove;0.17-0.2-0.5-0.6-0.8-0.9-1-1.001-1");
+							element.setStartPosition("0.17,0.6");
+							element.setEndPosition("0.405,0.6");
+							element.setSpeedX(5);
+							element.setSpeedY(0);
+							element.setColor("white");
+							elementsList.add(element);
+							animation.setElements(elementsList);
+							animations.add(animation);
+							
+						}
+//						car image with path
 						
 					}
 //					outer loop ends here
@@ -410,12 +438,22 @@ public class VideoModel {
 					for (int i=0; i<stoneAnimations.size() ;i++) {
 						Animation stoneAnimation= (Animation) stoneAnimations.get(i);
 						elementsList = stoneAnimation.getElements();
+						
+						
 						element = (Element) elementsList.get(1);
 						int xPos = ((i+1)*xGap) + tempWidth ;
-						tempWidth += element.getWidth();
+						int width = element.getWidth();
+						tempWidth += width;
 						element.setEffect(element.getEffect() + ";textXPosition;" + xPos + ";");
+						
+						element = (Element) elementsList.get(0);
+						element.setEffect(element.getEffect() + ";ImageXPosition;" + ( xPos +( ( width-element.getWidth() )/2 ) )  +";");
+						
 						stoneAnimation.setEnd(pictureTimeGap);
 					}
+					
+					
+					
 //					set end time of stone animations same as milestone time
 					
 				}
