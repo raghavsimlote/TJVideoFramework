@@ -20,6 +20,8 @@ import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,9 +29,11 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -104,6 +108,36 @@ public class SceneAgent extends Agent {
                                             iv1.setImage(image);
                                             iv1.setFitHeight(desc.getHeight());
                                             iv1.setFitWidth(desc.getWidth());
+                                            
+                                            if ( desc.getEffect().indexOf("setOpacity") >= 0 ) {
+                                            	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("setOpacity"), desc.getEffect().length());
+                                            	double opacityValue = Double.parseDouble(clipString.split(";")[1]);
+                                            	iv1.setOpacity(opacityValue);
+                                            }
+                                            
+                                            if ( desc.getEffect().indexOf("borderImage") >= 0 ) {
+                                            	 // set a clip to apply rounded border to the original image.
+                                            	Rectangle clip = new Rectangle(
+                                            			iv1.getFitWidth(), iv1.getFitHeight()
+                                            	);
+                                            	clip.setArcWidth(20);
+                                            	clip.setArcHeight(20);
+                                            	iv1.setClip(clip);
+                                            	 
+                                            	// snapshot the rounded image.
+                                            	SnapshotParameters parameters = new SnapshotParameters();
+                                            	parameters.setFill(Color.TRANSPARENT);
+                                            	WritableImage image = iv1.snapshot(parameters, null);
+                                            	 
+                                            	// remove the rounding clip so that our effect can show through.
+                                            	iv1.setClip(null);
+                                            	 
+                                            	// apply a shadow effect.
+                                            	iv1.setEffect(new DropShadow(20, Color.BLACK));
+                                            	 
+                                            	// store the rounded image in the imageView.
+                                            	iv1.setImage(image); 
+                                            }
                                             
                                             if ( desc.getEffect().indexOf("VehicleXStartPosition") >= 0 ) {
                                             	
@@ -287,6 +321,11 @@ public class SceneAgent extends Agent {
                                             	final double height = label.getLayoutBounds().getHeight();
 //                                    			xStart = ( Data.width - width - 10 );
                                             	xEnd = ( Data.width - width - gap );
+                                            	if ( xStart > 0 ) {
+                                            		
+                                            	}else {
+                                            		xStart =  xEnd;
+                                            	}
                                             	yEnd = (Data.height-gap);
                                             	yStart = (Data.height-gap);
                                             	

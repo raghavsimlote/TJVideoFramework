@@ -426,8 +426,8 @@ public class VideoModel {
 										animation.setEnd( pictureTimeGap + 2000 );
 										animation.setBackground("white");
 										elementsList = new ArrayList<Element>();
-										element = new Element();
 										
+										element = new Element();
 										element.setType("image");
 										element.setDescription(picture.getPath());
 										element.setWidth(Data.width);
@@ -436,7 +436,22 @@ public class VideoModel {
 										element.setEndPosition("0.2,0.3");
 										element.setSpeedX(0);
 										element.setSpeedY(0);
-										element.setEffect("middle");
+										element.setClip(false);
+										element.setEffect("middle;setOpacity;0.3");
+										element.setColor("white");
+										elementsList.add(element);
+										
+										element = new Element();
+										element.setType("image");
+										element.setDescription(picture.getPath());
+										element.setWidth(Data.width/2);
+										element.setHeight(Data.height/2);
+										element.setStartPosition("0.2,0.3");
+										element.setEndPosition("0.2,0.3");
+										element.setSpeedX(0);
+										element.setSpeedY(0);
+										element.setClip(false);
+										element.setEffect("middle;borderImage");
 										element.setColor("white");
 										elementsList.add(element);
 										
@@ -447,8 +462,8 @@ public class VideoModel {
 										element.setStartPosition("0.05,0.9");
 										element.setEndPosition("0.05,0.9");
 										element.setSpeedX(0);
-										element.setSpeedY(10);
-										element.setEffect("leftMargin;10;");
+										element.setSpeedY(0);
+										element.setEffect("belowImage;" + (Data.width/2) + ";" + (Data.height/2) + ";30;" );
 										element.setColor("white");
 										elementsList.add(element);
 										
@@ -456,11 +471,11 @@ public class VideoModel {
 										element.setType("text");
 										element.setDescription(picture.getPlace());
 										element.setHeight(25);
-										element.setStartPosition("0.8,0.9");
-										element.setEndPosition("0.8,0.9");
+										element.setStartPosition("0.0,0.9");
+										element.setEndPosition("0.0,0.9");
 										element.setSpeedX(0);
-										element.setSpeedY(10);
-										element.setEffect("rightMargin;10;");
+										element.setSpeedY(0);
+										element.setEffect("belowImage;" + (Data.width/2) + ";" + (Data.height/2) + ";30;" );
 										element.setColor("white");
 										elementsList.add(element);
 										animation.setElements(elementsList);
