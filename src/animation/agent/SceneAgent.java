@@ -31,6 +31,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import animation.model.Animation;
@@ -104,11 +105,31 @@ public class SceneAgent extends Agent {
                                             iv1.setFitHeight(desc.getHeight());
                                             iv1.setFitWidth(desc.getWidth());
                                             
+                                            if ( desc.getEffect().indexOf("VehicleXStartPosition") >= 0 ) {
+                                            	
+                                            	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("VehicleXStartPosition"), desc.getEffect().length());
+                                            	if ( xStart > 0 ) {
+                                            		
+                                            	} else {
+                                            		xStart = Integer.parseInt(clipString.split(";")[1]); 
+                                                	System.out
+    														.println("Car Start position: " + xStart);
+                                            	}
+                                            	
+                                            }
+                                            if ( desc.getEffect().indexOf("VehicleXStopPosition") >= 0 ) {
+                                            	
+                                            	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("VehicleXStopPosition"), desc.getEffect().length());
+                                            	xEnd = Integer.parseInt(clipString.split(";")[1]); 
+                                            	System.out
+												.println("Car End position: " + xEnd);
+                                            }
+                                            
                                             if ( desc.getEffect().indexOf("ImageXPosition") >= 0 ) {
                                             	
                                             	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("ImageXPosition"), desc.getEffect().length());
                                             	xEnd = Integer.parseInt(clipString.split(";")[1]); 
-                                            	System.out.println("Text X Position: " + xEnd);
+                                            	System.out.println("Image X Position: " + xEnd);
                                             }
                                             if (desc.getEffect().startsWith("middle")) {
                                            	 
@@ -206,13 +227,30 @@ public class SceneAgent extends Agent {
                                         	
                                             label = new Text(desc.getDescription());
                                             label.setFont(Font.font(null, FontWeight.SEMI_BOLD, desc.getHeight()));
+                                            
+//                                          font and size of the text
+		                                      if ( desc.getEffect().indexOf("font") >= 0 ) {
+		                                      	
+			                                      	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("font"), desc.getEffect().length());
+			                                      	String fontString = clipString.split(";")[1];
+			                                      	
+			                                      	if ( fontString.equals("bold") ) {
+			                                      		label.setFont(Font.font(null, FontWeight.BOLD, desc.getHeight()));
+			                                      	} else if ( fontString.equals("italic") ) {
+			                                      		label.setFont(Font.font(null, FontPosture.ITALIC, desc.getHeight()));
+			                                      	}
+		                                      	
+		                                      }              
+                               
+                                            
+//                                            for effects
                                             if ( desc.getEffect().indexOf("textXPosition") >= 0 ) {
                                             	
                                             	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("textXPosition"), desc.getEffect().length());
                                             	xEnd = Integer.parseInt(clipString.split(";")[1]); 
                                             	System.out.println("Text X Position: " + xEnd);
                                             }
-                                            if ( desc.getEffect().indexOf("boxMiddle") >= 0 ) {
+                                            else if ( desc.getEffect().indexOf("boxMiddle") >= 0 ) {
                                             	
                                             	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("boxMiddle"), desc.getEffect().length());
                                             	String xPostionString = clipString.split(";")[1];
@@ -225,7 +263,7 @@ public class SceneAgent extends Agent {
                                             	System.out
 												.println("Text End for Box Middle: " + xEnd);
                                             }
-                                            if (desc.getEffect().startsWith("middle")) {
+                                            else if ( desc.getEffect().indexOf("middle") >= 0 ) {
                                             	 final double width = label.getLayoutBounds().getWidth();
                                             	 if ( xStart == xEnd ) {
                                             		 xStart = ( Data.width - width ) / 2;
@@ -233,21 +271,29 @@ public class SceneAgent extends Agent {
 //                                                 xStart = ( Data.width - width ) / 2;
                                                  xEnd = ( Data.width - width )/2;
                                             }
-                                            else if (desc.getEffect().startsWith("leftMargin")) {
-//                                            	xStart = ( 10 );
-                                            	xEnd = ( 10 );
+                                            else if ( desc.getEffect().indexOf("leftMargin") >= 0 ) {
+                                            	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("leftMargin"), desc.getEffect().length());
+                                            	 int gap = Integer.parseInt(clipString.split(";")[1]); 
+//                                            	xStart = ( gap );
+                                            	xEnd = ( gap );
+                                            	final double height = label.getLayoutBounds().getHeight();
+                                            	yEnd = (Data.height-gap);
+                                            	yStart = (Data.height-gap);
                                             }
-                                            else if (desc.getEffect().startsWith("rightMargin")) {
-                                            	System.out
-														.println("Right Margin");
+                                            else if ( desc.getEffect().indexOf("rightMargin") >= 0 ) {
+                                            	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("rightMargin"), desc.getEffect().length());
+                                            	int gap = Integer.parseInt(clipString.split(";")[1]); 
                                             	final double width = label.getLayoutBounds().getWidth();
-//                                            	xStart = ( Data.width - width - 10 );
-                                            	xEnd = ( Data.width - width - 10 );
+                                            	final double height = label.getLayoutBounds().getHeight();
+//                                    			xStart = ( Data.width - width - 10 );
+                                            	xEnd = ( Data.width - width - gap );
+                                            	yEnd = (Data.height-gap);
+                                            	yStart = (Data.height-gap);
                                             	
                                             }
                                             
-                                            
-                                           
+
+                                         
                                             Reflection r = new Reflection();
                                             r.setFraction(0.5f);
                                             if (desc.getEffect().startsWith("resize")) {
@@ -277,7 +323,7 @@ public class SceneAgent extends Agent {
                                                 }
                                                 label.setOpacity(ratio);
                                             }
-
+                                            
 //                                            label.setEffect(r);
                                             label.setFill(Paint.valueOf(desc.getColor()));
                                             label.setLayoutX(xStart);
@@ -320,14 +366,45 @@ public class SceneAgent extends Agent {
                                                     }
                                                 }
                                             }
+                                           
                                             desc.setStartPosition(xStart / Data.width + "," + yStart / Data.height);
                                             root.getChildren().add(label);
                                             break;
                                         case "path":
                                             int num = 0;
                                             String[] splitCurrent = desc.getCurrentPosition().split(",");
-                                            double xCurrent = Data.width * Double.parseDouble(splitCurrent[0]);
-                                            double yCurrent = Data.height * Double.parseDouble(splitCurrent[1]);
+                                            double xCurrent = Double.parseDouble(splitCurrent[0]);
+                                            double yCurrent = Double.parseDouble(splitCurrent[1]);
+                                           
+                                            System.out.println("xCurrent 1: " + xCurrent);
+                                            System.out.println("yCurrent 1: " + yCurrent);
+                                            
+                                            if ( desc.getEffect().indexOf("VehicleXStartPosition") >= 0 ) {
+                                            	
+                                            	
+                                            	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("VehicleXStartPosition"), desc.getEffect().length());
+                                            	 
+                                            	if ( xStart > 0 ) {
+//                                            		xCurrent = Integer.parseInt(clipString.split(";")[1]);
+                                            	} else {
+                                            		xStart = Integer.parseInt(clipString.split(";")[1]); 
+                                            		xCurrent = Integer.parseInt(clipString.split(";")[1]);
+                                            		yCurrent = yStart;
+                                            		desc.setStartPosition(xCurrent + "," + yCurrent);
+                                            		desc.setCurrentPosition(xCurrent + "," + yCurrent);
+                                            		System.out.println("xCurrent 2: " + xCurrent);
+                                                    System.out.println("yCurrent 2: " + yCurrent);
+                                            	}
+                                            	 
+                                            }
+                                            if ( desc.getEffect().indexOf("VehicleXStopPosition") >= 0 ) {
+                                            	
+                                            	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("VehicleXStopPosition"), desc.getEffect().length());
+                                            	xEnd = Integer.parseInt(clipString.split(";")[1]);
+                                            	desc.setEndPosition(xEnd + "," + yEnd);
+                                            	System.out.println("xEnd 2: " + xEnd);
+                                            }
+                                            
                                             line = new Line(xStart, yStart, xCurrent, yCurrent);
                                             line.getStrokeDashArray().addAll(10d, 8d, 2d, 10d);
                                             //line.set
@@ -357,15 +434,23 @@ public class SceneAgent extends Agent {
                                                 String feetstr = desc.getEffect().split(";")[1];
                                                 if (Math.abs(xCurrent - xEnd) > desc.getSpeedX()) {
                                                     xCurrent = xCurrent + desc.getSpeedX();
+                                                    System.out
+															.println("Inside feet current 1: " + xCurrent);
                                                 }
-                                                desc.setCurrentPosition(xCurrent / Data.width + "," + yCurrent / Data.height);
-                                                num = (int) (xCurrent - xStart) / 30;
+
+//                                                desc.setCurrentPosition(xCurrent + "," + yCurrent);	
+                                        		
+                                                System.out
+												.println("Inside feet current 1: " + xCurrent);
+                                                num = (int) (xCurrent - xStart) / desc.getWidth();
+                                                System.out
+														.println("Number: " + num);
                                                 desc.setEffect("feet;" + num);
-                                                List<ImageView> feets = createTrack(num, xStart, yStart, desc.getDescription());
+                                                List<ImageView> feets = createTrack(num, xStart, yStart, desc.getDescription(), desc.getWidth());
                                                 root.getChildren().addAll(feets);
                                             }
 
-                                            root.getChildren().add(line);
+//                                            root.getChildren().add(line);
                                             break;
                                             
                                         case "video":
@@ -413,7 +498,7 @@ public class SceneAgent extends Agent {
                     }
                 });
                 //max is 2 minutes
-                if (timer > ( 2 * 60 * 1000 ) ) {//ms time elapsed
+                if (timer > ( 1 * 60 * 1000 ) ) {//ms time elapsed
                     //stop and save video
                     System.out.println("Saving video...");
                     IJ.run(imp, "AVI... ", "compression=JPEG frame=10 save=[E:\\videos\\Stack.avi]");
@@ -429,12 +514,12 @@ public class SceneAgent extends Agent {
         );
     }
 
-    private List<ImageView> createTrack(int num, double xStart, double yStart, String url) {
+    private List<ImageView> createTrack(int num, double xStart, double yStart, String url, int dividingFactor) {
         List<ImageView> imageViews = new ArrayList<>();
         Image image1 = new Image(url);
         for (int i = 0; i < num + 1; i++) {
             ImageView imageView = new ImageView(image1);
-            imageView.setX(xStart + 30 * i);
+            imageView.setX(xStart + dividingFactor * i);
             imageView.setY(yStart);
             imageView.setFitHeight(25);
             imageView.setFitWidth(25);

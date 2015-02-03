@@ -18,7 +18,7 @@ public class Data {
     public static List<Animation> animations;
     public static Scene scene;
     public static int timeUnit = 100;
-    public static int width = 480;
-    public static int height = 360;
+    public static int width = 800;
+    public static int height = 600;
 
 }

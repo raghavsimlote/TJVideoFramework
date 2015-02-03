@@ -14,6 +14,7 @@ import org.json.me.JSONArray;
 import org.json.me.JSONObject;
 
 import animation.utility.LogUtility;
+import animation.utility.TextUtility;
 
 import com.traveljar.vo.FriendVO;
 import com.traveljar.vo.JourneyVO;
@@ -90,19 +91,24 @@ public class VideoModel {
 			List<Element> elementsList = new ArrayList<Element>();
 			Element element = new Element();
 			
+			int startTime = 0;
+			int animationCounter=0;
+			
 //			journey intro starts here, may be we should think of applying css
 			JourneyVO journey = travelJar.getJourney();
 			if ( journey != null ) {
 				
+				animationCounter++;
 				animation = new Animation();
-				animation.setStart(0);
+				animation.setStart(startTime);
 				animation.setEnd(5000);
+				animation.setBackground("white");
 				elementsList = new ArrayList<Element>();
 				element = new Element();
 				element.setType("image");
-				element.setDescription("background.jpg");
-				element.setWidth(480);
-				element.setHeight(360);
+				element.setDescription(journey.getBgImagePath());
+				element.setWidth(Data.width);
+				element.setHeight(Data.height);
 				element.setStartPosition("0,0");
 				element.setEndPosition("0,0");
 				element.setEffect("");
@@ -111,77 +117,106 @@ public class VideoModel {
 				animation.setElements(elementsList);
 				animations.add(animation);
 				
+				animationCounter++;
 				animation = new Animation();
-				animation.setStart(0);
+				animation.setStart(startTime);
 				animation.setEnd(5000);
 				elementsList = new ArrayList<Element>();
 				element = new Element();
 				element.setType("text");
 				element.setDescription(journey.getName());
-				element.setHeight(20);
-				element.setEffect("middle");
+				element.setHeight(30);
+				element.setEffect("middle;font;bold;");
 				element.setStartPosition("-0.2,0.3");
 				element.setEndPosition("0.2,0.3");
-				element.setColor("black");
-				element.setSpeedX(20);
+				element.setColor("white");
+				element.setSpeedX(50);
 			
 				elementsList.add(element);
 				animation.setElements(elementsList);
 				animations.add(animation);
 				
+				animationCounter++;
 				animation = new Animation();
-				animation.setStart(1000);
+				startTime+=1000;
+				animation.setStart(startTime);
 				animation.setEnd(5000);
 				elementsList = new ArrayList<Element>();
 				element = new Element();
 				element.setType("text");
 				element.setDescription(journey.getTagLine());
-				element.setHeight(20);
-				element.setEffect("middle");
+				element.setHeight(25);
+				element.setEffect("middle;font;italic;");
 				element.setStartPosition("-0.2,0.4");
 				element.setEndPosition("0.2,0.4");
-				element.setSpeedX(20);
-				element.setColor("black");
+				element.setSpeedX(50);
+				element.setColor("white");
 				elementsList.add(element);
 				animation.setElements(elementsList);
 				animations.add(animation);
 				
+				animationCounter++;
 				animation = new Animation();
-				animation.setStart(2000);
+				startTime+=1000;
+				animation.setStart(startTime);
 				animation.setEnd(5000);
 				elementsList = new ArrayList<Element>();
 				element = new Element();
 				element.setType("text");
-				element.setDescription( journey.getStartDate() + " - " + journey.getEndDate() );
-				element.setHeight(20);
-				element.setEffect("leftMargin");
+				element.setDescription( journey.getNumberOfDays() + " Days");
+				element.setHeight(25);
+				element.setEffect("leftMargin;30;");
 				element.setStartPosition("-0.2,0.9");
 				element.setEndPosition("0.2,0.9");
-				element.setSpeedX(20);
-				element.setColor("black");
+				element.setSpeedX(50);
+				element.setColor("white");
 				elementsList.add(element);
 				animation.setElements(elementsList);
 				animations.add(animation);
 				
+				animationCounter++;
 				animation = new Animation();
-				animation.setStart(1500);
+				startTime-=500;
+				animation.setStart(startTime);
 				animation.setEnd(5000);
 				elementsList = new ArrayList<Element>();
 				element = new Element();
 				element.setType("text");
-				element.setDescription("Jaipur");
-				element.setHeight(20);
-				element.setEffect("rightMargin");
+				Vector places = journey.getPlacesList();
+				if ( places != null && places.size()>0 ) {
+					if ( places.size() > 1) {
+						element.setDescription( (String) journey.getPlacesList().get(1) );
+					} else 
+					{
+						element.setDescription( (String) journey.getPlacesList().get(0) );
+					}
+				} else {
+					element.setDescription( "" );
+				}
+				
+				element.setHeight(25);
+				element.setEffect("rightMargin;30;");
 				element.setStartPosition("-0.2,0.9");
 				element.setEndPosition("0.2,0.9");
-				element.setSpeedX(20);
-				element.setColor("black");
+				element.setSpeedX(50);
+				element.setColor("white");
 				elementsList.add(element);
 				animation.setElements(elementsList);
 				animations.add(animation);
-			
+				
+				startTime+=3000;
+				
+//				setting end time
+				if ( animations.size()-animationCounter >= 0 ) {
+					for ( int i=0; i<animations.size(); i++ ) {
+						animation = (Animation) animations.get(i);
+						animation.setEnd(startTime);
+					}
+				}
+				
 			}
-			
+
+			animationCounter = 0;
 //			journey intro ends here
 			Vector friendsVector = travelJar.getFriendsVector();
 			if ( friendsVector != null ) {
@@ -192,17 +227,20 @@ public class VideoModel {
 					if ( friendsVector.size() <=4 ) {
 						
 						int xGap = (int)( ( Data.width - ( 60*friendsVector.size() ) ) / ( friendsVector.size()+1) );
-						animation.setStart(5000);
+						animationCounter++;
+						animation = new Animation();
+						animation.setStart(startTime);
+						startTime+=2000;
 						animation.setEnd(15000);
 						elementsList = new ArrayList<Element>();
 						element = new Element();
 						element.setType("text");
 						element.setDescription("Memory Creators");
-						element.setHeight(20);
+						element.setHeight(30);
 						element.setStartPosition("0.4,-0.5");
 						element.setEndPosition("0.4,0.2");
 						element.setSpeedX(0);
-						element.setSpeedY(20);
+						element.setSpeedY(50);
 						element.setEffect("middle");
 						element.setColor("Black");
 						elementsList.add(element);
@@ -214,9 +252,10 @@ public class VideoModel {
 							
 							FriendVO friend = (FriendVO) friendsVector.get(i);
 							int xCoordinate = ( ( (i+1)*xGap ) + ( (i)*60  )  );
-							
+							animationCounter++;
 							animation = new Animation();
-							animation.setStart( 6000 + (i*2000) );
+							animation.setStart( startTime );
+							startTime += 2000;
 							animation.setEnd(15000);
 							elementsList = new ArrayList<Element>();
 							element = new Element();
@@ -226,7 +265,7 @@ public class VideoModel {
 							element.setHeight(60);
 							element.setStartPosition("0,0.4");
 							element.setEndPosition("0.1,0.4");
-							element.setSpeedX(20);
+							element.setSpeedX(50);
 							element.setSpeedY(0);
 							element.setClip(true);
 							element.setEffect("boxMiddle;"  + xCoordinate + ";");
@@ -237,10 +276,10 @@ public class VideoModel {
 							element = new Element();
 							element.setType("text");
 							element.setDescription(friend.getName());
-							element.setHeight(20);
-							element.setStartPosition("-0.1,0.65");
-							element.setEndPosition("0.1,0.65");
-							element.setSpeedX(20);
+							element.setHeight(25);
+							element.setStartPosition("-0.1,0.55");
+							element.setEndPosition("0.1,0.55");
+							element.setSpeedX(45);
 							element.setSpeedY(0);
 							element.setEffect("boxMiddle;" + xCoordinate + ";");
 							element.setColor("black");
@@ -252,14 +291,38 @@ public class VideoModel {
 						
 					}
 //					may continue and change row	
+					
+					
+					
+//					setting end time
+					if ( animations.size()-animationCounter >= 0 ) {
+						for ( int i=animations.size()-animationCounter; i<animations.size(); i++ ) {
+							animation = (Animation) animations.get(i);
+							animation.setEnd(startTime);
+						}
+					}
+					
+					
 				}
 			}
 			
-//			slide animation starts here
+//			gray color slide animation starts here
+			animation = new Animation();
 			animation.setName("slide");
-			animation.setStart(14000);
-			animation.setEnd(15000);
+			animation.setStart(startTime);
+			startTime += 500;
+			animation.setEnd(startTime);
 			animation.setBackground("gray");
+			animations.add(animation);
+//			slide animation ends here
+			
+//			gray color slide animation starts here
+			animation = new Animation();
+			animation.setName("slide");
+			animation.setStart(startTime);
+			startTime += 500;
+			animation.setEnd(startTime);
+			animation.setBackground("white");
 			animations.add(animation);
 //			slide animation ends here
 			
@@ -270,18 +333,21 @@ public class VideoModel {
 			
 				if ( ( milestonesVector.size()>1 ) && ( milestonesVector.size()<=4 ) ) {
 					
-					int pictureTimeGap = 15000;
+					int pictureTimeGap = startTime;
 					Vector<Animation> stoneAnimations = new Vector<Animation>();
+					Vector<Animation> carAnimations =  new Vector<Animation>();
+
 					int totalWidth = 0;
 					
 					Animation milestonesAnimation = new Animation();
 					milestonesAnimation.setStart(pictureTimeGap);
 					milestonesAnimation.setEnd(35000);
+					milestonesAnimation.setBackground("white");
 					elementsList = new ArrayList<Element>();
 					element = new Element();
 					element.setType("text");
 					element.setDescription("Milestones Title");
-					element.setHeight(15);
+					element.setHeight(50);
 					element.setStartPosition("0.4, 0.1");
 					element.setEndPosition("0.4, 0.1");
 					element.setSpeedX(0);
@@ -305,9 +371,11 @@ public class VideoModel {
 						elementsList = new ArrayList<Element>();
 						element = new Element();
 						element.setType("image");
-						element.setDescription(stone.getType());
-						element.setWidth(30);
-						element.setHeight(30);
+						String iconPathString = TextUtility.getIconPath(stone.getType());
+						System.out.println("Text path: " + iconPathString);
+						element.setDescription(iconPathString);
+						element.setWidth(64);
+						element.setHeight(64);
 						element.setStartPosition("0.0,0.4");
 						element.setEndPosition("0.1,0.4");
 						element.setSpeedX(20);
@@ -320,7 +388,7 @@ public class VideoModel {
 						element = new Element();
 						element.setType("text");
 						element.setDescription(stone.getName());
-						element.setHeight(15);
+						element.setHeight(20);
 						
 //						count the total width
 						Text label = new Text(stone.getName());
@@ -356,12 +424,14 @@ public class VideoModel {
 										pictureTimeGap += 2000;
 										animation.setStart(pictureTimeGap );
 										animation.setEnd( pictureTimeGap + 2000 );
+										animation.setBackground("white");
 										elementsList = new ArrayList<Element>();
 										element = new Element();
+										
 										element.setType("image");
 										element.setDescription(picture.getPath());
-										element.setWidth(240);
-										element.setHeight(180);
+										element.setWidth(Data.width);
+										element.setHeight(Data.height);
 										element.setStartPosition("0.2,0.3");
 										element.setEndPosition("0.2,0.3");
 										element.setSpeedX(0);
@@ -373,24 +443,24 @@ public class VideoModel {
 										element = new Element();
 										element.setType("text");
 										element.setDescription(picture.getDate());
-										element.setHeight(20);
+										element.setHeight(25);
 										element.setStartPosition("0.05,0.9");
 										element.setEndPosition("0.05,0.9");
 										element.setSpeedX(0);
 										element.setSpeedY(10);
-										element.setEffect("leftMargin");
+										element.setEffect("leftMargin;10;");
 										element.setColor("white");
 										elementsList.add(element);
 										
 										element = new Element();
 										element.setType("text");
 										element.setDescription(picture.getPlace());
-										element.setHeight(20);
+										element.setHeight(25);
 										element.setStartPosition("0.8,0.9");
 										element.setEndPosition("0.8,0.9");
 										element.setSpeedX(0);
 										element.setSpeedY(10);
-										element.setEffect("rightMargin");
+										element.setEffect("rightMargin;10;");
 										element.setColor("white");
 										elementsList.add(element);
 										animation.setElements(elementsList);
@@ -399,32 +469,58 @@ public class VideoModel {
 									}
 									
 								}
+								
 							}
 //							inner loop ends here
 							pictureTimeGap += 2000;
+							
 						}
 						
 						if ( ( (i+1)<milestonesVector.size() ) ) {
 							
-							animation = new Animation();
-							animation.setStart(pictureTimeGap);
+							Animation carAnimation = new Animation();
+							carAnimation.setBackground("white");
+							carAnimation.setStart(pictureTimeGap);
 							pictureTimeGap += 2000;
-							animation.setEnd(pictureTimeGap);
+							carAnimation.setEnd(pictureTimeGap);
 							elementsList = new ArrayList<Element>();
 							element = new Element();
 							element.setType("image");
-							element.setDescription( "car.jpg" );
-							element.setWidth(20);
-							element.setHeight(20);
-							element.setEffect("Lmove;0.17-0.2-0.5-0.6-0.8-0.9-1-1.001-1");
-							element.setStartPosition("0.17,0.6");
-							element.setEndPosition("0.405,0.6");
-							element.setSpeedX(5);
+							String carIconPathString = TextUtility.getIconPath("car");
+							element.setDescription( carIconPathString );
+							element.setWidth(64);
+							element.setHeight(64);
+							element.setEffect("");
+//							element.setEffect("Lmove;0.17-0.2-0.5-0.6-0.8-0.9-1-1.001-1");
+							element.setStartPosition("0.00,0.45");
+							element.setEndPosition("0.00,0.45");
+							element.setSpeedX(30);
 							element.setSpeedY(0);
 							element.setColor("white");
+							element.setClip(false);
 							elementsList.add(element);
-							animation.setElements(elementsList);
-							animations.add(animation);
+							
+//							element = new Element();
+//							element.setType("path");
+//							element.setDescription( "footsteps.png" );
+//							element.setWidth(20);
+//							element.setHeight(20);
+//							element.setEffect("feet;0");
+//							element.setCurrentPosition("0.00,0.45");
+//							element.setStartPosition("0.00,0.45");
+//							element.setEndPosition("0.00,0.45");
+//							element.setSpeedX(5);
+//							element.setSpeedY(0);
+//							element.setColor("white");
+//							element.setClip(false);
+//							elementsList.add(element);
+							
+							
+							
+							carAnimation.setElements(elementsList);
+							animations.add(carAnimation);
+							carAnimations.add(carAnimation);
+							
 							
 						}
 //						car image with path
@@ -436,9 +532,9 @@ public class VideoModel {
 					int xGap = (int) ( (Data.width-totalWidth) / (stoneAnimations.size()+1) );
 					int tempWidth = 0;
 					for (int i=0; i<stoneAnimations.size() ;i++) {
+						
 						Animation stoneAnimation= (Animation) stoneAnimations.get(i);
 						elementsList = stoneAnimation.getElements();
-						
 						
 						element = (Element) elementsList.get(1);
 						int xPos = ((i+1)*xGap) + tempWidth ;
@@ -450,6 +546,54 @@ public class VideoModel {
 						element.setEffect(element.getEffect() + ";ImageXPosition;" + ( xPos +( ( width-element.getWidth() )/2 ) )  +";");
 						
 						stoneAnimation.setEnd(pictureTimeGap);
+					
+						
+						if ( stoneAnimations.size() > 1 ) {
+							
+							if ( i==0 ) {
+								
+								Animation carAnimation = (Animation) carAnimations.get(i);
+								elementsList = carAnimation.getElements();
+								carAnimation.setEnd(pictureTimeGap);
+								element = elementsList.get(0);
+								element.setEffect(element.getEffect() + ";VehicleXStartPosition;" + ( xPos + width )  + ";");
+								
+//								element = elementsList.get(1);
+//								element.setEffect(element.getEffect() + ";VehicleXStartPosition;" + ( xPos + width )  + ";");
+								
+							} else if ( ( (i+1) < stoneAnimations.size() ) ) {
+								
+								Animation carAnimation = (Animation) carAnimations.get(i-1);
+								elementsList = carAnimation.getElements();
+								carAnimation.setEnd(pictureTimeGap);
+								element = elementsList.get(0);
+								element.setEffect(element.getEffect() + ";VehicleXStopPosition;" + ( xPos - element.getWidth() )  + ";");
+								
+//								element = elementsList.get(1);
+//								element.setEffect(element.getEffect() + ";VehicleXStopPosition;" + ( xPos - element.getWidth() )  + ";");
+								
+								carAnimation = (Animation) carAnimations.get(i);
+								elementsList = carAnimation.getElements();
+								carAnimation.setEnd(pictureTimeGap);
+								element = elementsList.get(0);
+								element.setEffect(element.getEffect() + ";VehicleXStartPosition;" + ( xPos + width )  + ";");
+								
+//								element = elementsList.get(1);
+//								element.setEffect(element.getEffect() + ";VehicleXStartPosition;" + ( xPos + width )  + ";");
+								
+							} else if ( ( (i+1) == stoneAnimations.size() ) ) {
+								
+								Animation carAnimation = (Animation) carAnimations.get(i-1);
+								elementsList = carAnimation.getElements();
+								element = elementsList.get(0);
+								element.setEffect(element.getEffect() + ";VehicleXStopPosition;" + ( xPos - element.getWidth() )  + ";");
+								
+//								element = elementsList.get(1);
+//								element.setEffect(element.getEffect() + ";VehicleXStopPosition;" + ( xPos - element.getWidth() )  + ";");
+							}
+								
+						}
+						
 					}
 					
 					

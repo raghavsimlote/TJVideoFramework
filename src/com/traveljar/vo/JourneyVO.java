@@ -14,7 +14,8 @@ public class JourneyVO {
 			this.setTagLine(journeyJson.optString("tag_line"));
 			this.setStartDate(journeyJson.optString("start_date"));
 			this.setEndDate(journeyJson.optString("end_date"));
-			this.setBrImagePath(journeyJson.optString("bg_image"));
+			this.setNumberOfDays(journeyJson.optString("no_of_days"));
+			this.setBgImagePath(journeyJson.optString("bg_image"));
 			JSONObject placeJson = journeyJson.optJSONObject("place");
 			if ( placeJson != null ) {
 				try {
@@ -25,6 +26,7 @@ public class JourneyVO {
 							String placeName = (String) placesArray.get(i);
 							placesVector.add(placeName);
 						}
+						this.setPlacesList(placesVector);
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -40,9 +42,18 @@ public class JourneyVO {
 	private String tagLine;
 	private String startDate;
 	private String endDate;
-	private String brImagePath;
+	private String numberOfDays;
+	private String bgImagePath;
 	private Vector<String> placesList;
 	
+	
+	
+	public String getNumberOfDays() {
+		return numberOfDays;
+	}
+	public void setNumberOfDays(String numberOfDays) {
+		this.numberOfDays = numberOfDays;
+	}
 	public String getName() {
 		return name;
 	}
@@ -67,11 +78,12 @@ public class JourneyVO {
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
-	public String getBrImagePath() {
-		return brImagePath;
+	
+	public String getBgImagePath() {
+		return bgImagePath;
 	}
-	public void setBrImagePath(String brImagePath) {
-		this.brImagePath = brImagePath;
+	public void setBgImagePath(String bgImagePath) {
+		this.bgImagePath = bgImagePath;
 	}
 	public Vector<String> getPlacesList() {
 		return placesList;
@@ -79,8 +91,5 @@ public class JourneyVO {
 	public void setPlacesList(Vector<String> placesList) {
 		this.placesList = placesList;
 	}
-	
-	
-	
-	
+		
 }

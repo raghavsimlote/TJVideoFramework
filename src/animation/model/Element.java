@@ -42,7 +42,7 @@ public class Element {
     private double speedX;
     @XmlElement
     private double speedY;
-
+    
     boolean changed = false;
 
     public String getName() {
