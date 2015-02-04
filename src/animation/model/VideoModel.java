@@ -463,7 +463,7 @@ public class VideoModel {
 										element.setEndPosition("0.05,0.9");
 										element.setSpeedX(0);
 										element.setSpeedY(0);
-										element.setEffect("belowImage;" + (Data.width/2) + ";" + (Data.height/2) + ";30;" );
+										element.setEffect("leftBelowImage;" + (Data.width/2) + ";" + (Data.height/2) + ";30;" );
 										element.setColor("white");
 										elementsList.add(element);
 										
@@ -475,7 +475,7 @@ public class VideoModel {
 										element.setEndPosition("0.0,0.9");
 										element.setSpeedX(0);
 										element.setSpeedY(0);
-										element.setEffect("belowImage;" + (Data.width/2) + ";" + (Data.height/2) + ";30;" );
+										element.setEffect("rightBelowImage;" + (Data.width/2) + ";" + (Data.height/2) + ";30;" );
 										element.setColor("white");
 										elementsList.add(element);
 										animation.setElements(elementsList);

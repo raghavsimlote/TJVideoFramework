@@ -330,6 +330,40 @@ public class SceneAgent extends Agent {
                                             	yStart = (Data.height-gap);
                                             	
                                             }
+                                            else if (desc.getEffect().indexOf("leftBelowImage") >= 0 ) {
+                                            	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("leftBelowImage"), desc.getEffect().length());
+                                            	double givenWidth = Double.parseDouble(clipString.split(";")[1]);
+                                            	double givenHeight = Double.parseDouble(clipString.split(";")[2]);
+                                            	double gap = Integer.parseInt(clipString.split(";")[3]); 
+                                            	
+                                                yStart = ( (Data.height - givenHeight ) / 2 ) + givenHeight + gap;
+                                                
+                                                yEnd = ( (Data.height - givenHeight ) / 2 ) + givenHeight + gap;
+                                                
+                                                if ( xStart == xEnd ) {
+                                                	xStart = ( ( Data.width - givenWidth ) / 2 ) + gap;
+                                           	 }
+//                                                xStart = ( Data.width - width ) / 2;
+                                                xEnd = ( ( Data.width - givenWidth )/ 2 ) + gap;
+                                                
+                                            }
+                                            else if (desc.getEffect().indexOf("rightBelowImage") >= 0 ) {
+                                            	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("rightBelowImage"), desc.getEffect().length());
+                                            	double givenWidth = Double.parseDouble(clipString.split(";")[1]);
+                                            	double givenHeight = Double.parseDouble(clipString.split(";")[2]);
+                                            	double gap = Integer.parseInt(clipString.split(";")[3]); 
+                                            	final double currentWidth = label.getLayoutBounds().getWidth();
+                                                yStart = ( (Data.height - givenHeight ) / 2 ) + givenHeight + gap;
+                                                
+                                                yEnd = ( (Data.height - givenHeight ) / 2 ) + givenHeight + gap;
+                                                
+                                                if ( xStart == xEnd ) {
+                                                	xStart = ( ( Data.width - givenWidth ) / 2 ) + ( givenWidth - currentWidth - (gap) ) ;
+                                           	 }
+//                                                xStart = ( Data.width - width ) / 2;
+                                                xEnd = ( ( Data.width - givenWidth ) / 2 ) + ( givenWidth - currentWidth - (gap) ) ;
+                                                
+                                            }
                                             
 
                                          
