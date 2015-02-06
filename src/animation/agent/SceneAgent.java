@@ -41,6 +41,7 @@ import javafx.scene.text.Text;
 import animation.model.Animation;
 import animation.model.Data;
 import animation.model.Element;
+import animation.utility.ImageUtility;
 import animation.utility.LogUtility;
 
 /**
@@ -105,6 +106,10 @@ public class SceneAgent extends Agent {
                                             double lMove = 1;
                                             iv1 = new ImageView();
                                             image = new Image(desc.getDescription());
+                                            
+//                                            resize and set the code
+                                            ImageUtility.resizeImageToFitFullScreen(image, desc);
+                                            
                                             iv1.setImage(image);
                                             iv1.setFitHeight(desc.getHeight());
                                             iv1.setFitWidth(desc.getWidth());
