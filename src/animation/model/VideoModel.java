@@ -498,7 +498,7 @@ public class VideoModel {
 				Vector<PictureVO> picturesVector = stone.getPictures();
 				if ( picturesVector != null ) {
 					if ( picturesVector.size()>0 ) {
-						
+						videoTime = createMilestonesPicturesAnimations(animations, videoTime, picturesVector);
 					}
 				}
 				
