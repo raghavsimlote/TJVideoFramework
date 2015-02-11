@@ -18,6 +18,8 @@ import animation.utility.TextUtility;
 
 import com.traveljar.vo.FriendVO;
 import com.traveljar.vo.JourneyVO;
+import com.traveljar.vo.MoodVO;
+import com.traveljar.vo.NoteVO;
 import com.traveljar.vo.PictureVO;
 import com.traveljar.vo.StoneVO;
 import com.traveljar.vo.TravelJarVO;
@@ -106,22 +108,26 @@ public class VideoModel {
 //			friends introduction ends here
 			
 //			gray color slide animation starts here
-			videoTime = createSlideAnimations(animations, videoTime, "gray");
+//			videoTime = createSlideAnimations(animations, videoTime, "gray");
 //			gray color slide animation ends here
 			
 //			white color slide animation starts here
-			videoTime = createSlideAnimations(animations, videoTime, "white");
+//			videoTime = createSlideAnimations(animations, videoTime, "white");
 //			white color slide animation ends here
 			
 //			milestones starts here
 			Vector<StoneVO> milestonesVector = travelJar.getMilestonesVector();
 			if ( milestonesVector != null ) {
 				if ( milestonesVector.size()>0 ) {
-					videoTime = createMilestonesAnimations(animations, videoTime, milestonesVector);
+					String titleOfJourney = "NOT PROVIDED";
+					if ( journey != null ) {
+						titleOfJourney = journey.getName();
+					}
+					videoTime = createMilestonesAnimations(animations, videoTime, milestonesVector, titleOfJourney );
 				}
 			}
 //			milestones ends here
-			
+						
 			return animations;
 		}
 		
@@ -361,7 +367,7 @@ public class VideoModel {
 		
 	}
 	
-	public int createMilestonesAnimations(List <Animation> animations, int videoTime, Vector<StoneVO> milestonesVector ) {
+	public int createMilestonesAnimations(List <Animation> animations, int videoTime, Vector<StoneVO> milestonesVector, String titleOfJourney ) {
 		
 		List<Element> elementsList = new ArrayList<Element>();
 		Element element = new Element();
@@ -380,8 +386,8 @@ public class VideoModel {
 			elementsList = new ArrayList<Element>();
 			element = new Element();
 			element.setType("text");
-			element.setDescription("Milestones Title");
-			element.setHeight(50);
+			element.setDescription(titleOfJourney);
+			element.setHeight(30);
 			element.setStartPosition("0.4, 0.1");
 			element.setEndPosition("0.4, 0.1");
 			element.setSpeedX(0);
@@ -493,14 +499,34 @@ public class VideoModel {
 				}
 //				car image with path
 				
-				
-				
+//				milestones pictures animations starts here
 				Vector<PictureVO> picturesVector = stone.getPictures();
 				if ( picturesVector != null ) {
 					if ( picturesVector.size()>0 ) {
 						videoTime = createMilestonesPicturesAnimations(animations, videoTime, picturesVector);
 					}
 				}
+//				milestones pictures animations ends here
+				
+//				milestones notes animations starts here
+				Vector<NoteVO> notesVector = stone.getNotes();
+				
+				if ( notesVector != null ) {
+					if ( notesVector.size()>0 ) {
+						videoTime = createMilestonesNotesAnimations(animations, videoTime, notesVector);
+					}
+				}
+//				milestones notes animations ends here
+				
+//				milestones moods animations starts here
+				Vector<MoodVO> moodsVector = stone.getMoods();
+				if ( moodsVector != null ) {
+					if ( moodsVector.size()>0 ) {
+						videoTime = createMilestonesMoodsAnimations(animations, videoTime, moodsVector);
+					}
+				}
+//				milestones moods animations ends here
+				
 				
 			}
 //			outer loop ends here
@@ -520,8 +546,8 @@ public class VideoModel {
 				int width = element.getWidth();
 				tempWidth += width;
 				element.setEffect(element.getEffect() + ";textXPosition;" + xPos + ";");
-				
 				element = (Element) elementsList.get(0);
+				
 				element.setEffect(element.getEffect() + ";ImageXPosition;" + ( xPos +( ( width-element.getWidth() )/2 ) )  +";");
 				
 				stoneAnimation.setEnd(videoTime);
@@ -580,7 +606,9 @@ public class VideoModel {
 //			set end time of stone animations same as milestone time
 			
 		}
-//		atleast 2 milestones are required for this and check for more than one row
+		else if ( ( milestonesVector.size()>4 ) && ( milestonesVector.size()<=8 ) ) {
+			
+		}
 		
 		
 		return videoTime;
@@ -622,8 +650,8 @@ public class VideoModel {
 				element = new Element();
 				element.setType("image");
 				element.setDescription(picture.getPath());
-				element.setWidth(Data.width/2);
-				element.setHeight(Data.height/2);
+				element.setWidth((Data.width*2)/3);
+				element.setHeight((Data.height*2)/3);
 				element.setStartPosition("0.2,0.3");
 				element.setEndPosition("0.2,0.3");
 				element.setSpeedX(0);
@@ -641,8 +669,8 @@ public class VideoModel {
 				element.setEndPosition("0.05,0.9");
 				element.setSpeedX(0);
 				element.setSpeedY(0);
-				element.setEffect("leftBelowImage;" + (Data.width/2) + ";" + (Data.height/2) + ";25;" );
-				element.setColor("white");
+				element.setEffect("leftBelowImage;" + ((Data.width*2)/3) + ";" + ((Data.height*2)/3) + ";25;" );
+				element.setColor("BLACK");
 				elementsList.add(element);
 				
 				element = new Element();
@@ -653,8 +681,8 @@ public class VideoModel {
 				element.setEndPosition("0.0,0.9");
 				element.setSpeedX(0);
 				element.setSpeedY(0);
-				element.setEffect("rightBelowImage;" + (Data.width/2) + ";" + (Data.height/2) + ";25;" );
-				element.setColor("white");
+				element.setEffect("rightBelowImage;" + ((Data.width*2)/3) + ";" + ((Data.height*2)/3) + ";25;" );
+				element.setColor("BLACK");
 				elementsList.add(element);
 				animation.setElements(elementsList);
 				animations.add(animation);
@@ -667,6 +695,185 @@ public class VideoModel {
 		return videoTime;
 		
 	}
+	
+	public int createMilestonesNotesAnimations(List<Animation> animations, int videoTime, Vector<NoteVO> notesVector) {
+		
+		Animation animation = new Animation();
+		List<Element> elementsList = new ArrayList<Element>();
+		Element element = new Element();
+		
+//		loop starts here
+		for ( int j=0; j<notesVector.size(); j++) {
+			NoteVO note = (NoteVO) notesVector.get(j);
+			if ( note!= null ) {
+
+				animation = new Animation();
+				videoTime += 2000;
+				animation.setStart(videoTime );
+				animation.setEnd( videoTime + 2000 );
+				animation.setBackground("TT");
+				elementsList = new ArrayList<Element>();
+				
+				element = new Element();
+				element.setType("text");
+				element.setDescription(note.getDescription());
+				element.setWidth(Data.width/2);
+				element.setHeight(25);
+				element.setStartPosition("0.2,0.3");
+				element.setEndPosition("0.2,0.3");
+				element.setSpeedX(0);
+				element.setSpeedY(0);
+				element.setClip(false);
+				element.setEffect("middle");
+				element.setColor("black");
+				elementsList.add(element);
+				
+				element = new Element();
+				element.setType("text");
+				element.setDescription(note.getDate());
+				element.setHeight(25);
+				element.setStartPosition("0.05,0.9");
+				element.setEndPosition("0.05,0.9");
+				element.setSpeedX(0);
+				element.setSpeedY(0);
+				element.setEffect("leftBelowImage;" + (Data.width/2) + ";" + (Data.height/2) + ";25;" );
+				element.setColor("black");
+				elementsList.add(element);
+				
+				element = new Element();
+				element.setType("text");
+				element.setDescription(note.getPlace());
+				element.setHeight(25);
+				element.setStartPosition("0.0,0.9");
+				element.setEndPosition("0.0,0.9");
+				element.setSpeedX(0);
+				element.setSpeedY(0);
+				element.setEffect("rightBelowImage;" + (Data.width/2) + ";" + (Data.height/2) + ";25;" );
+				element.setColor("black");
+				elementsList.add(element);
+				animation.setElements(elementsList);
+				animations.add(animation);
+				
+			}
+			
+		}
+//		loop ends here
+		videoTime += 2000;
+		return videoTime;
+		
+	}
+
+public int createMilestonesMoodsAnimations(List<Animation> animations, int videoTime, Vector<MoodVO> moodsVector) {
+	
+	Animation animation = new Animation();
+	List<Element> elementsList = new ArrayList<Element>();
+	Element element = new Element();
+	
+//	loop starts here
+	for ( int j=0; j<moodsVector.size(); j++) {
+		MoodVO mood = (MoodVO) moodsVector.get(j);
+		if ( mood!= null ) {
+			
+			animation = new Animation();
+			videoTime += 2000;
+			animation.setStart(videoTime );
+			animation.setEnd( videoTime + 2000 );
+			animation.setBackground("white");
+			elementsList = new ArrayList<Element>();
+			
+			element = new Element();
+			element.setType("image");
+			String iconPathString = TextUtility.getIconPath(stone.getType());
+			System.out.println("Icon path for milestone: " + iconPathString);
+			element.setDescription(iconPathString);
+			element.setWidth(64);
+			element.setHeight(64);
+			element.setStartPosition("0.0,0.4");
+			element.setEndPosition("0.1,0.4");
+			element.setSpeedX(20);
+			element.setSpeedY(0);
+			element.setEffect("");
+//			element.setEffect("fade;0-0.1-0.2-0.3-0.4-0.5-0.6-0.7-0.8-0.9-1");
+			element.setColor("white");
+			elementsList.add(element);
+			
+			element = new Element();
+			element.setType("text");
+			element.setDescription(mood.getPerson() + " is");
+			element.setHeight(20);
+			
+//			count the total width
+			Text label = new Text(mood.getPerson() + " is");
+			label.setFont(Font.font(null, FontWeight.SEMI_BOLD, element.getHeight()));
+			int width  =  (int) label.getLayoutBounds().getWidth();
+			element.setWidth(width);
+			double totalWidth = label.getLayoutBounds().getWidth();
+//			System.out.println("Width is " + totalWidth);
+			
+			element.setStartPosition("0.0,0.55");
+			element.setEndPosition("0.1,0.55");
+			element.setSpeedX(20);
+			element.setSpeedY(0);
+			element.setEffect("");
+//			element.setEffect("fade;0-0.1-0.2-0.3-0.4-0.5-0.6-0.7-0.8-0.9-1");
+			element.setColor("black");
+			elementsList.add(element);
+			
+			element = new Element();
+			element.setType("text");
+			element.setDescription(mood.getPerson() + " is");
+			element.setHeight(25);
+			element.setSpeedX(0);
+			element.setSpeedY(0);
+			element.setEffect("middle;font;bold;");
+			element.setStartPosition("-0.2,0.3");
+			element.setEndPosition("0.2,0.3");
+			element.setColor("black");
+			elementsList.add(element);
+			
+			element = new Element();
+			element.setType("image");
+			String emotIconPathString = TextUtility.getEmotIconPath(mood.getMood());
+			element.setDescription("");
+			if ( emotIconPathString!=null ) {
+				element.setDescription(emotIconPathString);
+			}
+			element.setHeight(30);
+			element.setEffect("middle;");
+			element.setStartPosition("-0.2,0.3");
+			element.setEndPosition("0.2,0.3");
+			element.setColor("white");
+			element.setSpeedX(50);
+		
+			elementsList.add(element);
+			animation.setElements(elementsList);
+			animations.add(animation);
+			
+			element = new Element();
+			element.setType("text");
+			element.setDescription(mood.getReason());
+			element.setHeight(25);
+			element.setEffect("middle;font;italic;");
+			element.setStartPosition("-0.2,0.4");
+			element.setEndPosition("0.2,0.4");
+			element.setSpeedX(50);
+			element.setColor("white");
+			elementsList.add(element);
+			animation.setElements(elementsList);
+			animations.add(animation);
+			
+			animation.setElements(elementsList);
+			animations.add(animation);
+			
+			
+		}
+		
+	}
+//	loop ends here
+	videoTime += 2000;
+	return videoTime;
+	
+}
 	
 
 }

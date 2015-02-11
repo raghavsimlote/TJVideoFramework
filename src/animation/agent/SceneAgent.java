@@ -26,6 +26,7 @@ import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.Background;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -84,6 +85,7 @@ public class SceneAgent extends Agent {
                                 if (snapshot == null) {
                                     snapshot = createSnapshot(Data.scene);
                                 }
+                                
                                 root.getScene().setFill(Paint.valueOf(animation.getBackground()));
                                 iv1 = new ImageView();
                                 image = SwingFXUtils.toFXImage(snapshot, null);
@@ -94,6 +96,17 @@ public class SceneAgent extends Agent {
                                 iv1.setFitWidth(Data.width);
                                 root.getChildren().add(iv1);
                             } else {
+                            	String colorString = animation.getBackground();
+//                            	for setting background of comments and notes
+                            	if ( colorString!=null && colorString.length()>0 && colorString.equals("TT") ) {
+                            		ImageView view = new ImageView();
+                            		view.setFitHeight(Data.width);
+                            		view.setFitWidth(Data.height);
+                            		view.setImage(null);
+                            		view.setStyle("-fx-background-color: #FF0000;");
+                            		root.getChildren().add(view);
+                            	}
+                            	
                                 for (Element desc : animation.getElements()) {
                                     String[] splitStart = desc.getStartPosition().split(",");
                                     String[] splitEnd = desc.getEndPosition().split(",");
@@ -168,7 +181,7 @@ public class SceneAgent extends Agent {
                                             	
                                             	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("ImageXPosition"), desc.getEffect().length());
                                             	xEnd = Integer.parseInt(clipString.split(";")[1]); 
-                                            	System.out.println("Image X Position: " + xEnd);
+                                            	System.out.println("Image X Position: " + xEnd );
                                             }
                                             if (desc.getEffect().startsWith("middle")) {
                                            	 
@@ -341,9 +354,9 @@ public class SceneAgent extends Agent {
                                             	double givenHeight = Double.parseDouble(clipString.split(";")[2]);
                                             	double gap = Integer.parseInt(clipString.split(";")[3]); 
                                             	
-                                                yStart = ( (Data.height - givenHeight ) / 2 ) + givenHeight + gap;
+                                                yStart = ( (Data.height - givenHeight ) / 2 ) + givenHeight + (gap + (gap));
                                                 
-                                                yEnd = ( (Data.height - givenHeight ) / 2 ) + givenHeight + gap;
+                                                yEnd = ( (Data.height - givenHeight ) / 2 ) + givenHeight + (gap + (gap));
                                                 
                                                 if ( xStart == xEnd ) {
                                                 	xStart = ( ( Data.width - givenWidth ) / 2 ) + gap;
@@ -358,9 +371,9 @@ public class SceneAgent extends Agent {
                                             	double givenHeight = Double.parseDouble(clipString.split(";")[2]);
                                             	double gap = Integer.parseInt(clipString.split(";")[3]); 
                                             	final double currentWidth = label.getLayoutBounds().getWidth();
-                                                yStart = ( (Data.height - givenHeight ) / 2 ) + givenHeight + gap;
+                                                yStart = ( (Data.height - givenHeight ) / 2 ) + givenHeight + (gap + (gap));
                                                 
-                                                yEnd = ( (Data.height - givenHeight ) / 2 ) + givenHeight + gap;
+                                                yEnd = ( (Data.height - givenHeight ) / 2 ) + givenHeight + (gap + (gap));
                                                 
                                                 if ( xStart == xEnd ) {
                                                 	xStart = ( ( Data.width - givenWidth ) / 2 ) + ( givenWidth - currentWidth - (gap) ) ;
@@ -565,18 +578,21 @@ public class SceneAgent extends Agent {
                             imp.setStack(imageStack);
                             imp.show();
                         } else {
-
+                        	
                             imp.setImage(createSnapshot(Data.scene));
                             imp.setTitle("Animation " + (timer) / 1000);
                             imageStack.addSlice((new ImagePlus("Animation", imp.getProcessor())).getProcessor());
                             imp.setStack(imageStack);
                             imp.setSlice(imageStack.getSize());
+                            
                             timer = timer + Data.timeUnit;
                         }
+                       
+                        
                     }
                 });
                 //max is 2 minutes
-                if (timer > ( 1 * 60 * 1000 ) ) {//ms time elapsed
+                if (timer > ( 2 * 60 * 1000 ) ) {//ms time elapsed
                     //stop and save video
                     System.out.println("Saving video...");
                     IJ.run(imp, "AVI... ", "compression=JPEG frame=10 save=[E:\\videos\\Stack.avi]");
@@ -622,7 +638,15 @@ public class SceneAgent extends Agent {
     }
 
     private BufferedImage createSnapshot(final Scene scene) {
-        return SwingFXUtils.fromFXImage(scene.snapshot(new WritableImage(Data.width, Data.height)), null); // Get buffered image.
+//    	BufferedImage img = null;
+//    		try{
+//    		img = SwingFXUtils.fromFXImage(scene.snapshot(new WritableImage(Data.width, Data.height)), null);
+//    	} catch (Throwable e) {
+//    		System.out.println("Exception e: " + e);
+//    	}
+//    	
+//    	return img;
+    	return SwingFXUtils.fromFXImage(scene.snapshot(new WritableImage(Data.width, Data.height)), null); // Get buffered image.
         //ImageIO.write(image, "jpeg", raOutputStream);
     }
 }

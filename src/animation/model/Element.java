@@ -45,7 +45,7 @@ public class Element {
     
     boolean changed = false;
 
-    public String getName() {
+	public String getName() {
         return name;
     }
 

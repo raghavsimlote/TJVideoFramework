@@ -49,6 +49,24 @@ public class StoneVO {
 				e.printStackTrace();
 			}
 			try {
+				JSONObject notesJson =  stonesJson.getJSONObject("notes");
+				if ( notesJson != null ) {
+					JSONArray notesArray = notesJson.getJSONArray("note");
+					if ( notesArray!=null && notesArray.length()>0 ) {
+						Vector<NoteVO> notesVector = new Vector<NoteVO>();
+						for (int i=0; i<notesArray.length(); i++) {
+							JSONObject noteObject = (JSONObject) notesArray.getJSONObject(i);
+							NoteVO note = new NoteVO(noteObject);
+							notesVector.add(note);
+						}
+						this.setNotes(notesVector);
+					}
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
 				JSONObject moodsJson =  stonesJson.getJSONObject("moods");
 				if ( moodsJson != null ) {
 					JSONArray moodsArray = moodsJson.getJSONArray("mood");
@@ -74,6 +92,7 @@ public class StoneVO {
 	private String type;
 	private Vector <PictureVO> pictures;
 	private Vector <VideoVO> videos;
+	private Vector <NoteVO> notes;
 	private Vector <MoodVO> moods;
 	
 	public String getName() {
@@ -99,6 +118,12 @@ public class StoneVO {
 	}
 	public void setVideos(Vector<VideoVO> videos) {
 		this.videos = videos;
+	}
+	public Vector<NoteVO> getNotes() {
+		return notes;
+	}
+	public void setNotes(Vector<NoteVO> notes) {
+		this.notes = notes;
 	}
 	public Vector<MoodVO> getMoods() {
 		return moods;
