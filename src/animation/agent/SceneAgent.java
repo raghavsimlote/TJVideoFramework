@@ -26,12 +26,12 @@ import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.Background;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Box;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -98,13 +98,15 @@ public class SceneAgent extends Agent {
                             } else {
                             	String colorString = animation.getBackground();
 //                            	for setting background of comments and notes
-                            	if ( colorString!=null && colorString.length()>0 && colorString.equals("TT") ) {
-                            		ImageView view = new ImageView();
-                            		view.setFitHeight(Data.width);
-                            		view.setFitWidth(Data.height);
-                            		view.setImage(null);
-                            		view.setStyle("-fx-background-color: #FF0000;");
-                            		root.getChildren().add(view);
+                            	if ( colorString!=null && colorString.length()>0 && colorString.equals("NotesColor") ) {
+           
+                                    Rectangle r = new Rectangle();
+                                    r.setX(0);
+                                    r.setY(0);
+                                    r.setWidth(Data.width);
+                                    r.setHeight(Data.height);
+                                    r.setFill(Color.DARKGRAY);
+                                    root.getChildren().add(r);
                             	}
                             	
                                 for (Element desc : animation.getElements()) {
@@ -189,6 +191,14 @@ public class SceneAgent extends Agent {
                                                 yStart = (Data.height - desc.getHeight() ) / 2;
                                                 xEnd = ( Data.width - desc.getWidth() )/2;
                                                 yEnd = (Data.height - desc.getHeight() ) / 2;
+                                           }
+                                            
+                                            if (desc.getEffect().startsWith("widthMiddle")) {
+                                              	 
+                                                xStart = ( Data.width - desc.getWidth() ) / 2;
+//                                                yStart = (Data.height - desc.getHeight() ) / 2;
+                                                xEnd = ( Data.width - desc.getWidth() )/2;
+//                                                yEnd = (Data.height - desc.getHeight() ) / 2;
                                            }
                                             
                                             if ( desc.getEffect().indexOf("boxMiddle") >= 0 ) {
@@ -323,6 +333,14 @@ public class SceneAgent extends Agent {
 //                                                 xStart = ( Data.width - width ) / 2;
                                                  xEnd = ( Data.width - width )/2;
                                             }
+                                            else if ( desc.getEffect().indexOf("widthMiddle") >= 0 ) {
+                                           	 final double width = label.getLayoutBounds().getWidth();
+                                           	 if ( xStart == xEnd ) {
+                                           		 xStart = ( Data.width - width ) / 2;
+                                           	 }
+//                                                xStart = ( Data.width - width ) / 2;
+                                                xEnd = ( Data.width - width )/2;
+                                           }
                                             else if ( desc.getEffect().indexOf("leftMargin") >= 0 ) {
                                             	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("leftMargin"), desc.getEffect().length());
                                             	 int gap = Integer.parseInt(clipString.split(";")[1]); 
@@ -377,9 +395,33 @@ public class SceneAgent extends Agent {
                                                 
                                                 if ( xStart == xEnd ) {
                                                 	xStart = ( ( Data.width - givenWidth ) / 2 ) + ( givenWidth - currentWidth - (gap) ) ;
-                                           	 }
+                                           	 	}
 //                                                xStart = ( Data.width - width ) / 2;
                                                 xEnd = ( ( Data.width - givenWidth ) / 2 ) + ( givenWidth - currentWidth - (gap) ) ;
+                                                
+                                            }
+                                            else if (desc.getEffect().indexOf("leftBelowLine") >= 0 ) {
+                                            	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("leftBelowLine"), desc.getEffect().length());
+                                            	double gap = Integer.parseInt(clipString.split(";")[2]); 
+                                                
+                                                if ( xStart == xEnd ) {
+                                                	xStart = xStart + gap;
+                                           	 	}
+//                                                xStart = ( Data.width - width ) / 2;
+                                                xEnd = xEnd + gap;
+                                                
+                                            }
+                                            else if (desc.getEffect().indexOf("rightBelowLine") >= 0 ) {
+                                            	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("rightBelowLine"), desc.getEffect().length());
+                                            	double givenWidth = Double.parseDouble(clipString.split(";")[1]);
+                                            	double gap = Integer.parseInt(clipString.split(";")[2]); 
+                                            	final double currentWidth = label.getLayoutBounds().getWidth();
+                                               
+                                                if ( xStart == xEnd ) {
+                                                	xStart = xStart + ( givenWidth - currentWidth - (gap) ) ;
+                                           	 	}
+//                                                xStart = ( Data.width - width ) / 2;
+                                                xEnd = xEnd + ( givenWidth - currentWidth - (gap) ) ;
                                                 
                                             }
                                             
@@ -543,6 +585,14 @@ public class SceneAgent extends Agent {
 
 //                                            root.getChildren().add(line);
                                             break;
+                                            
+                                        case "line":
+                                        	System.out.println("Line will be created");
+                                        	
+                                        	 Line line1 = new Line(xStart, yStart, (Data.width/2), yStart);
+                                        	 line1.setStroke(Color.LIGHTGRAY);
+                                        	 root.getChildren().add(line1);
+                                        	break;
                                             
                                         case "video":
                                         	// create media player

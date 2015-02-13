@@ -20,9 +20,9 @@ public class TextUtility {
 	
 	public static String getEmotIconPath(String type) {
 		
-		if ( type.equals("happy") ) {
+		if ( type.equals("sad") ) {
 			return "resources/images/icons/sedan2.png";
-		} else if ( type.equals("sad") ) {
+		} else if ( type.equals("happy") ) {
 			return "resources/images/icons/city8.png";
 		}
 		
