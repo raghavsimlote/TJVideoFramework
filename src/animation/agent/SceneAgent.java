@@ -31,7 +31,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Box;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
@@ -136,12 +135,14 @@ public class SceneAgent extends Agent {
                                             }
                                             
                                             if ( desc.getEffect().indexOf("borderImage") >= 0 ) {
-                                            	 // set a clip to apply rounded border to the original image.
+                                            	
+                                            	// set a clip to apply rounded border to the original image.
                                             	Rectangle clip = new Rectangle(
-                                            			iv1.getFitWidth(), iv1.getFitHeight()
+                                            			( iv1.getFitWidth() ), ( iv1.getFitHeight() )
                                             	);
                                             	clip.setArcWidth(20);
                                             	clip.setArcHeight(20);
+                           
                                             	iv1.setClip(clip);
                                             	 
                                             	// snapshot the rounded image.
@@ -156,7 +157,8 @@ public class SceneAgent extends Agent {
                                             	iv1.setEffect(new DropShadow(20, Color.BLACK));
                                             	 
                                             	// store the rounded image in the imageView.
-                                            	iv1.setImage(image); 
+                                            	iv1.setImage(image);                  	
+                                            	
                                             }
                                             
                                             if ( desc.getEffect().indexOf("VehicleXStartPosition") >= 0 ) {
@@ -402,13 +404,14 @@ public class SceneAgent extends Agent {
                                             }
                                             else if (desc.getEffect().indexOf("leftBelowLine") >= 0 ) {
                                             	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("leftBelowLine"), desc.getEffect().length());
+                                            	double givenWidth = Double.parseDouble(clipString.split(";")[1]);
                                             	double gap = Integer.parseInt(clipString.split(";")[2]); 
                                                 
                                                 if ( xStart == xEnd ) {
-                                                	xStart = xStart + gap;
+                                                	xStart = ( ( Data.width - givenWidth )/2 ) + gap;
                                            	 	}
 //                                                xStart = ( Data.width - width ) / 2;
-                                                xEnd = xEnd + gap;
+                                                xEnd = ( ( Data.width - givenWidth )/2 ) + gap;
                                                 
                                             }
                                             else if (desc.getEffect().indexOf("rightBelowLine") >= 0 ) {
@@ -418,10 +421,10 @@ public class SceneAgent extends Agent {
                                             	final double currentWidth = label.getLayoutBounds().getWidth();
                                                
                                                 if ( xStart == xEnd ) {
-                                                	xStart = xStart + ( givenWidth - currentWidth - (gap) ) ;
+                                                	xStart = ( ( Data.width - givenWidth )/2 ) + givenWidth - currentWidth - (gap) ;
                                            	 	}
 //                                                xStart = ( Data.width - width ) / 2;
-                                                xEnd = xEnd + ( givenWidth - currentWidth - (gap) ) ;
+                                                xEnd = ( ( Data.width - givenWidth )/2 ) + givenWidth - currentWidth - (gap) ;
                                                 
                                             }
                                             
@@ -589,9 +592,22 @@ public class SceneAgent extends Agent {
                                         case "line":
                                         	System.out.println("Line will be created");
                                         	
-                                        	 Line line1 = new Line(xStart, yStart, (Data.width/2), yStart);
-                                        	 line1.setStroke(Color.LIGHTGRAY);
-                                        	 root.getChildren().add(line1);
+                                        	if ( desc.getEffect().indexOf("startFromLine") >= 0 ) {
+                                        		String waitString = desc.getEffect().split(";")[1];
+                                        		final double width = Double.parseDouble(waitString);
+                                           	 	if ( xStart == xEnd ) {
+                                           	 		xStart = ( Data.width - width )/2;
+                                           	 		
+                                           	 	}
+//                                           	xStart = ( Data.width - width ) / 2;
+                                           	 	xEnd = ( Data.width - width )/2;
+                                           	 	System.out
+														.println("Line Draw xStart: " + xStart + " yStart: " + yStart + " Width: " + (xStart + width) );
+                                           	 	Line line1 = new Line( xStart, yStart, (xStart + width), yStart );
+                                           	 	line1.setStroke(Color.LIGHTGRAY);
+                                           	 	root.getChildren().add(line1);
+                                        	}
+                                        	
                                         	break;
                                             
                                         case "video":
@@ -651,6 +667,7 @@ public class SceneAgent extends Agent {
                     imp.setSlice(1);
                     imp = new ImagePlus("Animation");
                     imageStack = new ImageStack();
+                    
                 }
                 doWait(Data.timeUnit);
             }

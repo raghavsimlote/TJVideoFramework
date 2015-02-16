@@ -434,6 +434,7 @@ public class VideoModel {
 				Text label = new Text(stone.getName());
 				label.setFont(Font.font(null, FontWeight.SEMI_BOLD, element.getHeight()));
 				int width  =  (int) label.getLayoutBounds().getWidth();
+				System.out.println("Width 2 is " + width);
 				element.setWidth(width);
 				totalWidth += label.getLayoutBounds().getWidth();
 //				System.out.println("Width is " + totalWidth);
@@ -534,7 +535,8 @@ public class VideoModel {
 //			setting end time, width, height of  stones elements and car animations
 			videoTime += 2000;
 			milestonesAnimation.setEnd(videoTime);
-			int xGap = (int) ( (Data.width-totalWidth) / (stoneAnimations.size()+1) );
+			int initialGap = 20;
+			int xGap = (int) ( (Data.width-totalWidth- (initialGap*2)) / (stoneAnimations.size()-1) );
 			int tempWidth = 0;
 			for (int i=0; i<stoneAnimations.size() ;i++) {
 				
@@ -542,8 +544,13 @@ public class VideoModel {
 				elementsList = stoneAnimation.getElements();
 				
 				element = (Element) elementsList.get(1);
-				int xPos = ((i+1)*xGap) + tempWidth ;
+				int xPos = initialGap + ((i+1)*xGap) + tempWidth ;
 				int width = element.getWidth();
+				if ( (i==0)  ) {
+					xPos = initialGap;
+				} else if ( (i==stoneAnimations.size()-1) ) {
+					xPos = Data.width-width-initialGap;
+				}
 				tempWidth += width;
 				element.setEffect(element.getEffect() + ";textXPosition;" + xPos + ";");
 				element = (Element) elementsList.get(0);
@@ -717,12 +724,20 @@ public class VideoModel {
 				element = new Element();
 				element.setType("text");
 				element.setDescription(note.getDescription());
-				
-				Text label = new Text(note.getDescription());
-				label.setFont(Font.font(null, FontWeight.SEMI_BOLD, element.getHeight()));
-				int width  =  (int) label.getLayoutBounds().getWidth();
-				element.setWidth(width);
 				element.setHeight(25);
+				Text label = new Text(note.getDescription());
+				System.out.println("Note Description : " + note.getDescription());
+				label.setFont(Font.font(null, FontWeight.SEMI_BOLD, element.getHeight()));
+				double width  =  label.getLayoutBounds().getWidth();
+				
+				
+//				Text label = new Text(mood.getPerson() + " is");
+//				label.setFont(Font.font(null, FontWeight.SEMI_BOLD, element.getHeight()));
+//				int width  =  (int) label.getLayoutBounds().getWidth();
+				
+				System.out.println("Width 3 is " + width);
+				element.setWidth((int)width);
+				
 				element.setStartPosition("0.2,0.3");
 				element.setEndPosition("0.2,0.3");
 				element.setSpeedX(0);
@@ -735,14 +750,14 @@ public class VideoModel {
 				element = new Element();
 				element.setType("line");
 				element.setDescription("Not Applicable");
-				element.setWidth(width);
+				element.setWidth((int)width);
 				element.setHeight(2);
 				element.setStartPosition("0.2,0.35");
 				element.setEndPosition("0.2,0.35");
 				element.setSpeedX(0);
 				element.setSpeedY(0);
 				element.setClip(false);
-				element.setEffect("middle;");
+				element.setEffect("startFromLine;" + width + ";");
 				element.setColor("black");
 				elementsList.add(element);
 				
@@ -750,10 +765,11 @@ public class VideoModel {
 				element.setType("text");
 				element.setDescription(note.getDate());
 				element.setHeight(25);
-				element.setStartPosition("0.2,0.40");
-				element.setEndPosition("0.2,0.40");
+				element.setStartPosition("0.2,0.42");
+				element.setEndPosition("0.2,0.42");
 				element.setSpeedX(0);
 				element.setSpeedY(0);
+				System.out.println("Set width is " + width);
 				element.setEffect("leftBelowLine;" + (width) + ";25;" );
 				element.setColor("black");
 				elementsList.add(element);
@@ -762,8 +778,8 @@ public class VideoModel {
 				element.setType("text");
 				element.setDescription(note.getPlace());
 				element.setHeight(25);
-				element.setStartPosition("0.0,0.40");
-				element.setEndPosition("0.0,0.40");
+				element.setStartPosition("0.0,0.42");
+				element.setEndPosition("0.0,0.42");
 				element.setSpeedX(0);
 				element.setSpeedY(0);
 				element.setEffect("rightBelowLine;" + (width) + ";25;" );
@@ -827,6 +843,7 @@ public int createMilestonesMoodsAnimations(List<Animation> animations, int video
 			Text label = new Text(mood.getPerson() + " is");
 			label.setFont(Font.font(null, FontWeight.SEMI_BOLD, element.getHeight()));
 			int width  =  (int) label.getLayoutBounds().getWidth();
+			System.out.println("Width 1 is " + width);
 			element.setWidth(width);
 			double totalWidth = label.getLayoutBounds().getWidth();
 //			System.out.println("Width is " + totalWidth);
@@ -847,7 +864,8 @@ public int createMilestonesMoodsAnimations(List<Animation> animations, int video
 			if ( emotIconPathString!=null ) {
 				element.setDescription(emotIconPathString);
 			}
-			element.setHeight(30);
+			element.setWidth(20);
+			element.setHeight(20);
 			element.setEffect("widthMiddle;");
 			element.setStartPosition("0.3,0.52");
 			element.setEndPosition("0.3,0.52");
@@ -862,8 +880,8 @@ public int createMilestonesMoodsAnimations(List<Animation> animations, int video
 			element.setDescription(mood.getReason());
 			element.setHeight(25);
 			element.setEffect("widthMiddle;");
-			element.setStartPosition("0.3,0.56");
-			element.setEndPosition("0.3,0.56");
+			element.setStartPosition("0.3,0.60");
+			element.setEndPosition("0.3,0.60");
 //			element.setSpeedX(50);
 			element.setColor("BLACK");
 			elementsList.add(element);
