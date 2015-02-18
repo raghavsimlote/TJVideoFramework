@@ -406,13 +406,13 @@ public class VideoModel {
 				Animation stoneAnimation = new Animation();
 //				pictureTimeGap += 5000;
 				stoneAnimation.setStart(videoTime);
-				System.out.println("Picture Gap Time: " + videoTime);
+//				//System.out.println("Picture Gap Time: " + videoTime);
 				stoneAnimation.setEnd(35000);
 				elementsList = new ArrayList<Element>();
 				element = new Element();
 				element.setType("image");
 				String iconPathString = TextUtility.getIconPath(stone.getType());
-				System.out.println("Icon path for milestone: " + iconPathString);
+//				//System.out.println("Icon path for milestone: " + iconPathString);
 				element.setDescription(iconPathString);
 				element.setWidth(64);
 				element.setHeight(64);
@@ -434,10 +434,10 @@ public class VideoModel {
 				Text label = new Text(stone.getName());
 				label.setFont(Font.font(null, FontWeight.SEMI_BOLD, element.getHeight()));
 				int width  =  (int) label.getLayoutBounds().getWidth();
-				System.out.println("Width 2 is " + width);
+//				//System.out.println("Width 2 is " + width);
 				element.setWidth(width);
 				totalWidth += label.getLayoutBounds().getWidth();
-//				System.out.println("Width is " + totalWidth);
+//				//System.out.println("Width is " + totalWidth);
 				
 				element.setStartPosition("0.0,0.55");
 				element.setEndPosition("0.1,0.55");
@@ -457,9 +457,9 @@ public class VideoModel {
 					
 					Animation carAnimation = new Animation();
 					carAnimation.setBackground("white");
-					videoTime += 2000;
+					videoTime += ((i+1)*1000);
 					carAnimation.setStart(videoTime);
-					videoTime += 2000;
+					videoTime += ((i+1)*1000);
 					carAnimation.setEnd(videoTime);
 					elementsList = new ArrayList<Element>();
 					element = new Element();
@@ -544,11 +544,13 @@ public class VideoModel {
 				elementsList = stoneAnimation.getElements();
 				
 				element = (Element) elementsList.get(1);
-				int xPos = initialGap + ((i+1)*xGap) + tempWidth ;
 				int width = element.getWidth();
-				if ( (i==0)  ) {
+				
+				int xPos = ( (i)*xGap ) + tempWidth;
+				if ( ( i==0 )  ) {
 					xPos = initialGap;
-				} else if ( (i==stoneAnimations.size()-1) ) {
+					tempWidth += initialGap;
+				} else if ( ( i==stoneAnimations.size()-1 ) ) {
 					xPos = Data.width-width-initialGap;
 				}
 				tempWidth += width;
@@ -726,7 +728,7 @@ public class VideoModel {
 				element.setDescription(note.getDescription());
 				element.setHeight(25);
 				Text label = new Text(note.getDescription());
-				System.out.println("Note Description : " + note.getDescription());
+//				//System.out.println("Note Description : " + note.getDescription());
 				label.setFont(Font.font(null, FontWeight.SEMI_BOLD, element.getHeight()));
 				double width  =  label.getLayoutBounds().getWidth();
 				
@@ -735,7 +737,7 @@ public class VideoModel {
 //				label.setFont(Font.font(null, FontWeight.SEMI_BOLD, element.getHeight()));
 //				int width  =  (int) label.getLayoutBounds().getWidth();
 				
-				System.out.println("Width 3 is " + width);
+//				//System.out.println("Width 3 is " + width);
 				element.setWidth((int)width);
 				
 				element.setStartPosition("0.2,0.3");
@@ -769,7 +771,7 @@ public class VideoModel {
 				element.setEndPosition("0.2,0.42");
 				element.setSpeedX(0);
 				element.setSpeedY(0);
-				System.out.println("Set width is " + width);
+//				//System.out.println("Set width is " + width);
 				element.setEffect("leftBelowLine;" + (width) + ";25;" );
 				element.setColor("black");
 				elementsList.add(element);
@@ -819,7 +821,7 @@ public int createMilestonesMoodsAnimations(List<Animation> animations, int video
 			element.setType("image");
 			element.setDescription("resources/images/friends/005.PNG");
 			String iconPathString = TextUtility.getImagePathFromFriendId(friendsVector, mood.getPerson());
-			System.out.println("Icon path for Mood: " + iconPathString);
+//			//System.out.println("Icon path for Mood: " + iconPathString);
 			if ( iconPathString != null ) {
 				element.setDescription(iconPathString);
 			}
@@ -843,10 +845,10 @@ public int createMilestonesMoodsAnimations(List<Animation> animations, int video
 			Text label = new Text(mood.getPerson() + " is");
 			label.setFont(Font.font(null, FontWeight.SEMI_BOLD, element.getHeight()));
 			int width  =  (int) label.getLayoutBounds().getWidth();
-			System.out.println("Width 1 is " + width);
+//			//System.out.println("Width 1 is " + width);
 			element.setWidth(width);
 			double totalWidth = label.getLayoutBounds().getWidth();
-//			System.out.println("Width is " + totalWidth);
+//			//System.out.println("Width is " + totalWidth);
 			
 			element.setStartPosition("0.3,0.50");
 			element.setEndPosition("0.3,0.50");

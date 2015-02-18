@@ -50,7 +50,7 @@ public class Main extends Application {
         	
 //            ReadXML readXML = new ReadXML();
 //            Data.animations = readXML.getAnimations();
-            System.out.println("Data.animations " + Data.animations.size());
+//            //System.out.println("Data.animations " + Data.animations.size());
             Object[] obj = new Object[2];
             obj[1] = root;
             for (Animation a : Data.animations) {
@@ -64,7 +64,7 @@ public class Main extends Application {
 
             sceneAgent = agentContainer.createNewAgent("scene", SceneAgent.class.getName(), obj);
             sceneAgent.start();
-            System.out.println("*******************");
+            //System.out.println("*******************");
             launch(args);
         } catch (StaleProxyException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

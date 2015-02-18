@@ -4,36 +4,56 @@
     "tag_line": "zindagi na milegi dobara",
     "start_date": "28th Dec, 2014",
     "end_date": "2nd Jan, 2015",
+	"no_of_days": "4",
     "place": {
       "place_item": [
-        "jaipur",
-        "jaisalmer",
-        "jodhpur"
+        "Jaipur",
+        "Jaisalmer",
+        "Jodhpur"
       ]
     },
-    "bg_image": "path_XYZ"
+    "bg_image": "resources/images/other/image_4.JPG"
   },
   "friends": {
       "friend_item": [
 		{
 			"name": "Abhinav",
-			"profile_img": "path_XYZ"
+			"profile_img": "resources/images/friends/005.PNG"
+		},
+		{
+			"name": "Rakesh",
+			"profile_img": "resources/images/friends/006.PNG"
+		},
+		{
+			"name": "Sankalp",
+			"profile_img": "resources/images/friends/007.PNG"
+		},
+		{
+			"name": "Vaibhav",
+			"profile_img": "resources/images/friends/005.PNG"
 		}
       ]
     },
 	"milestone": {
       "stone": [
 		{
-			"name": "jaipur",
-			"type": "“city",
+			"name": "Jaipur",
+			"type": "city",
 			"pictures": {
 				"picture": [
 					{
-						"path": "Abhinav",
-						"caption": "path_XYZ",
-						"description": "Abhinav",
-						"place": "Abhinav",
-						"date": "Abhinav"
+						"path": "resources/images/other/image_1.JPG",
+						"caption": "caption_1",
+						"description": "description_1",
+						"place": "Jaipur",
+						"date": "Mon, 12 Dec 2015"
+					},
+					{
+						"path": "resources/images/other/image_2.JPG",
+						"caption": "caption_2",
+						"description": "description_2",
+						"place": "Jaipur",
+						"date": "Tue, 13 Dec 2015"
 					}
 				]
 			},
@@ -51,6 +71,48 @@
 			"notes": {
 				"note": [
 					{
+						"path": "resources/images/other/image_3.JPG",
+						"caption": "caption_1",
+						"description": "soul to soul communication is silence.",
+						"place": "Jaipur",
+						"date": "Tue, 13 Dec 2015"
+					}
+				]
+			},
+			"moods": {
+				"mood": [
+					{
+						"person": "Abhinav",
+						"mood": "was sad",
+						"reason": "because of missing his cat"
+					}
+				]
+			}
+		},
+		{
+			"name": "Jaisalmer",
+			"type": "city",
+			"pictures": {
+				"picture": [
+					{
+						"path": "resources/images/other/image_1.JPG",
+						"caption": "caption_1",
+						"description": "description_1",
+						"place": "Jaipur",
+						"date": "Mon, 12 Dec 2015"
+					},
+					{
+						"path": "resources/images/other/image_2.JPG",
+						"caption": "caption_2",
+						"description": "description_2",
+						"place": "Jaipur",
+						"date": "Tue, 13 Dec 2015"
+					}
+				]
+			},
+			"videos": {
+				"video": [
+					{
 						"path": "Abhinav",
 						"caption": "path_XYZ",
 						"description": "Abhinav",
@@ -59,12 +121,129 @@
 					}
 				]
 			},
+			"notes": {
+				"note": [
+					{
+						"path": "resources/images/other/image_3.JPG",
+						"caption": "caption_1",
+						"description": "soul to soul communication is silence.",
+						"place": "Jaipur",
+						"date": "Tue, 13 Dec 2015"
+					}
+				]
+			},
 			"moods": {
 				"mood": [
 					{
 						"person": "Abhinav",
-						"mood": "path_XYZ",
-						"reason": "Abhinav"
+						"mood": "was sad",
+						"reason": "because of missing his cat"
+					}
+				]
+			}
+		},
+		{
+			"name": "Udaipur",
+			"type": "city",
+			"pictures": {
+				"picture": [
+					{
+						"path": "resources/images/other/image_1.JPG",
+						"caption": "caption_1",
+						"description": "description_1",
+						"place": "Jaipur",
+						"date": "Mon, 12 Dec 2015"
+					},
+					{
+						"path": "resources/images/other/image_2.JPG",
+						"caption": "caption_2",
+						"description": "description_2",
+						"place": "Jaipur",
+						"date": "Tue, 13 Dec 2015"
+					}
+				]
+			},
+			"videos": {
+				"video": [
+					{
+						"path": "Abhinav",
+						"caption": "path_XYZ",
+						"description": "Abhinav",
+						"place": "Abhinav",
+						"date": "Abhinav"
+					}
+				]
+			},
+			"notes": {
+				"note": [
+					{
+						"path": "resources/images/other/image_3.JPG",
+						"caption": "caption_1",
+						"description": "soul to soul communication is silence.",
+						"place": "Jaipur",
+						"date": "Tue, 13 Dec 2015"
+					}
+				]
+			},
+			"moods": {
+				"mood": [
+					{
+						"person": "Abhinav",
+						"mood": "was sad",
+						"reason": "because of missing his cat"
+					}
+				]
+			}
+		},
+		{
+			"name": "Jodhpur",
+			"type": "city",
+			"pictures": {
+				"picture": [
+					{
+						"path": "resources/images/other/image_3.JPG",
+						"caption": "caption_1",
+						"description": "description_1",
+						"place": "Jaipur",
+						"date": "Tue, 13 Dec 2015"
+					},
+					{
+						"path": "resources/images/other/image_4.JPG",
+						"caption": "caption_2",
+						"description": "description_2",
+						"place": "Jaipur",
+						"date": "Wed, 14 Dec 2015"
+					}
+				]
+			},
+			"videos": {
+				"video": [
+					{
+						"path": "Abhinav",
+						"caption": "path_XYZ",
+						"description": "Abhinav",
+						"place": "Abhinav",
+						"date": "Abhinav"
+					}
+				]
+			},
+			"notes": {
+				"note": [
+					{
+						"path": "resources/images/other/image_3.JPG",
+						"caption": "caption_1",
+						"description": "soul to soul communication is silence.",
+						"place": "Jaipur",
+						"date": "Tue, 13 Dec 2015"
+					}
+				]
+			},
+			"moods": {
+				"mood": [
+					{
+						"person": "Abhinav",
+						"mood": "was sad",
+						"reason": "because of missing his cat"
 					}
 				]
 			}

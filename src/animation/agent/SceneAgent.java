@@ -168,8 +168,8 @@ public class SceneAgent extends Agent {
                                             		
                                             	} else {
                                             		xStart = Integer.parseInt(clipString.split(";")[1]); 
-                                                	System.out
-    														.println("Car Start position: " + xStart);
+                                                	//System.out
+//    														.println("Car Start position: " + xStart);
                                             	}
                                             	
                                             }
@@ -177,15 +177,15 @@ public class SceneAgent extends Agent {
                                             	
                                             	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("VehicleXStopPosition"), desc.getEffect().length());
                                             	xEnd = Integer.parseInt(clipString.split(";")[1]); 
-                                            	System.out
-												.println("Car End position: " + xEnd);
+                                            	//System.out
+//												.println("Car End position: " + xEnd);
                                             }
                                             
                                             if ( desc.getEffect().indexOf("ImageXPosition") >= 0 ) {
                                             	
                                             	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("ImageXPosition"), desc.getEffect().length());
                                             	xEnd = Integer.parseInt(clipString.split(";")[1]); 
-                                            	System.out.println("Image X Position: " + xEnd );
+//                                            	//System.out.println("Image X Position: " + xEnd );
                                             }
                                             if (desc.getEffect().startsWith("middle")) {
                                            	 
@@ -207,8 +207,8 @@ public class SceneAgent extends Agent {
                                             	
                                             	String xPostionString = desc.getEffect().split(";")[1];
                                             	xEnd = Integer.parseInt(xPostionString);
-                                            	System.out
-														.println("Image End coordinates: " + xEnd);
+                                            	//System.out
+//														.println("Image End coordinates: " + xEnd);
                                             }
                                             
                                             if (desc.getEffect().startsWith("Lmove")) {
@@ -312,7 +312,7 @@ public class SceneAgent extends Agent {
                                             	
                                             	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("textXPosition"), desc.getEffect().length());
                                             	xEnd = Integer.parseInt(clipString.split(";")[1]); 
-                                            	System.out.println("Text X Position: " + xEnd);
+//                                            	//System.out.println("Text X Position: " + xEnd);
                                             }
                                             else if ( desc.getEffect().indexOf("boxMiddle") >= 0 ) {
                                             	
@@ -324,8 +324,8 @@ public class SceneAgent extends Agent {
 //                                            	xStart = xStart + ( ( 60 - width ) / 2 );
                                             	xEnd = Integer.parseInt(xPostionString)  + ( ( 60 - width ) / 2 ) ;
 //                                            	LogUtility.printLog("2. XEnd: " + xEnd + " Width: " + width);
-                                            	System.out
-												.println("Text End for Box Middle: " + xEnd);
+                                            	//System.out
+//												.println("Text End for Box Middle: " + xEnd);
                                             }
                                             else if ( desc.getEffect().indexOf("middle") >= 0 ) {
                                             	 final double width = label.getLayoutBounds().getWidth();
@@ -512,8 +512,8 @@ public class SceneAgent extends Agent {
                                             double xCurrent = Double.parseDouble(splitCurrent[0]);
                                             double yCurrent = Double.parseDouble(splitCurrent[1]);
                                            
-                                            System.out.println("xCurrent 1: " + xCurrent);
-                                            System.out.println("yCurrent 1: " + yCurrent);
+//                                            //System.out.println("xCurrent 1: " + xCurrent);
+//                                            //System.out.println("yCurrent 1: " + yCurrent);
                                             
                                             if ( desc.getEffect().indexOf("VehicleXStartPosition") >= 0 ) {
                                             	
@@ -528,8 +528,8 @@ public class SceneAgent extends Agent {
                                             		yCurrent = yStart;
                                             		desc.setStartPosition(xCurrent + "," + yCurrent);
                                             		desc.setCurrentPosition(xCurrent + "," + yCurrent);
-                                            		System.out.println("xCurrent 2: " + xCurrent);
-                                                    System.out.println("yCurrent 2: " + yCurrent);
+//                                            		//System.out.println("xCurrent 2: " + xCurrent);
+//                                                    //System.out.println("yCurrent 2: " + yCurrent);
                                             	}
                                             	 
                                             }
@@ -538,7 +538,7 @@ public class SceneAgent extends Agent {
                                             	String clipString = desc.getEffect().substring(desc.getEffect().indexOf("VehicleXStopPosition"), desc.getEffect().length());
                                             	xEnd = Integer.parseInt(clipString.split(";")[1]);
                                             	desc.setEndPosition(xEnd + "," + yEnd);
-                                            	System.out.println("xEnd 2: " + xEnd);
+//                                            	//System.out.println("xEnd 2: " + xEnd);
                                             }
                                             
                                             line = new Line(xStart, yStart, xCurrent, yCurrent);
@@ -570,17 +570,17 @@ public class SceneAgent extends Agent {
                                                 String feetstr = desc.getEffect().split(";")[1];
                                                 if (Math.abs(xCurrent - xEnd) > desc.getSpeedX()) {
                                                     xCurrent = xCurrent + desc.getSpeedX();
-                                                    System.out
-															.println("Inside feet current 1: " + xCurrent);
+                                                    //System.out
+//															.println("Inside feet current 1: " + xCurrent);
                                                 }
 
 //                                                desc.setCurrentPosition(xCurrent + "," + yCurrent);	
                                         		
-                                                System.out
-												.println("Inside feet current 1: " + xCurrent);
+                                                //System.out
+//												.println("Inside feet current 1: " + xCurrent);
                                                 num = (int) (xCurrent - xStart) / desc.getWidth();
-                                                System.out
-														.println("Number: " + num);
+                                                //System.out
+//														.println("Number: " + num);
                                                 desc.setEffect("feet;" + num);
                                                 List<ImageView> feets = createTrack(num, xStart, yStart, desc.getDescription(), desc.getWidth());
                                                 root.getChildren().addAll(feets);
@@ -590,7 +590,7 @@ public class SceneAgent extends Agent {
                                             break;
                                             
                                         case "line":
-                                        	System.out.println("Line will be created");
+//                                        	//System.out.println("Line will be created");
                                         	
                                         	if ( desc.getEffect().indexOf("startFromLine") >= 0 ) {
                                         		String waitString = desc.getEffect().split(";")[1];
@@ -601,8 +601,8 @@ public class SceneAgent extends Agent {
                                            	 	}
 //                                           	xStart = ( Data.width - width ) / 2;
                                            	 	xEnd = ( Data.width - width )/2;
-                                           	 	System.out
-														.println("Line Draw xStart: " + xStart + " yStart: " + yStart + " Width: " + (xStart + width) );
+                                           	 	//System.out
+//														.println("Line Draw xStart: " + xStart + " yStart: " + yStart + " Width: " + (xStart + width) );
                                            	 	Line line1 = new Line( xStart, yStart, (xStart + width), yStart );
                                            	 	line1.setStroke(Color.LIGHTGRAY);
                                            	 	root.getChildren().add(line1);
@@ -660,9 +660,9 @@ public class SceneAgent extends Agent {
                 //max is 2 minutes
                 if (timer > ( 2 * 60 * 1000 ) ) {//ms time elapsed
                     //stop and save video
-                    System.out.println("Saving video...");
+                    //System.out.println("Saving video...");
                     IJ.run(imp, "AVI... ", "compression=JPEG frame=10 save=[E:\\videos\\Stack.avi]");
-                    System.out.println("Done");
+                    //System.out.println("Done");
                     doDelete();
                     imp.setSlice(1);
                     imp = new ImagePlus("Animation");
@@ -709,7 +709,7 @@ public class SceneAgent extends Agent {
 //    		try{
 //    		img = SwingFXUtils.fromFXImage(scene.snapshot(new WritableImage(Data.width, Data.height)), null);
 //    	} catch (Throwable e) {
-//    		System.out.println("Exception e: " + e);
+//    		//System.out.println("Exception e: " + e);
 //    	}
 //    	
 //    	return img;
