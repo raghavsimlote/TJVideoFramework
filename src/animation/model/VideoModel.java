@@ -33,7 +33,7 @@ public class VideoModel {
 		
 		try {
 		
-			File file = new File("E://Log/traveljar_json.txt");
+			File file = new File("src/traveljar_json.txt");
 			
 			org.json.simple.parser.JSONParser jsonParser = new org.json.simple.parser.JSONParser();
 			org.json.simple.JSONObject jsonObject = (org.json.simple.JSONObject) jsonParser.parse(new FileReader(file));

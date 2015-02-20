@@ -75,12 +75,16 @@ public class SceneAgent extends Agent {
             @Override
             public void action() {
             	
+            	System.out.println("5.1");
+            	
                 Platform.runLater(() -> {
                     root.getChildren().clear();
                     for (Animation animation : Data.animations) {
+                    	System.out.println("Timer: " + timer );
                         if (timer < animation.getEnd() && timer > animation.getStart()) {
                             //                               
                             if (animation.getElements().isEmpty()) {
+                            	System.out.println("5.3");
                                 if (snapshot == null) {
                                     snapshot = createSnapshot(Data.scene);
                                 }
@@ -109,6 +113,7 @@ public class SceneAgent extends Agent {
                             	}
                             	
                                 for (Element desc : animation.getElements()) {
+                                	System.out.println("5.2");
                                     String[] splitStart = desc.getStartPosition().split(",");
                                     String[] splitEnd = desc.getEndPosition().split(",");
                                     double xStart = Data.width * Double.parseDouble(splitStart[0]);
@@ -638,6 +643,7 @@ public class SceneAgent extends Agent {
                         }
                     }
                     if (Data.scene != null) {
+                    	System.out.println("5.4");
                         if (imageStack == null) {
                             imp.setImage(createSnapshot(Data.scene));
                             imageStack = imp.getImageStack();
